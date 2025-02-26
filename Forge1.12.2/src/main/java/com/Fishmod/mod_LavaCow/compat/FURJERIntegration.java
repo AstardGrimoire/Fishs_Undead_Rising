@@ -49,13 +49,12 @@ import jeresources.api.JERPlugin;
 import jeresources.api.conditionals.LightLevel;
 import net.minecraft.world.World;
 
-public class FURJERIntegration implements ModIntegration {
+public class FURJERIntegration {
     @JERPlugin
     public static IJERAPI jerAPI;
     public static World world;
 
-    @Override
-    public void init() {
+    public static void init() {
         world = jerAPI.getWorld();
         // Loot table mob loot
         jerAPI.getMobRegistry().register(new EntityLavaCow(world), LootTableHandler.LAVACOW);

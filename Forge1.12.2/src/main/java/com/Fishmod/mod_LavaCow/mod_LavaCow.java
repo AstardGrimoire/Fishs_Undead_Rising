@@ -1,12 +1,15 @@
 package com.Fishmod.mod_LavaCow;
 
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.quark.QuarkCompat;
+import com.Fishmod.mod_LavaCow.compat.rlcombat.RLCombatCompat;
+import com.Fishmod.mod_LavaCow.compat.tinkers.ConstructsArmoryCompat;
+import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompat;
+import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompatClient;
 import org.apache.logging.log4j.Logger;
 
 import com.Fishmod.mod_LavaCow.client.Modconfig;
-import com.Fishmod.mod_LavaCow.compat.TinkersCompatBridge;
 import com.Fishmod.mod_LavaCow.compat.FURJERIntegration;
-import com.Fishmod.mod_LavaCow.compat.ModIntegrationRegistry;
-import com.Fishmod.mod_LavaCow.compat.QuarkCompatBridge;
 import com.Fishmod.mod_LavaCow.init.AddRecipes;
 import com.Fishmod.mod_LavaCow.message.PacketMountSpecial;
 import com.Fishmod.mod_LavaCow.message.PacketParticle;
@@ -22,7 +25,6 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.DungeonHooks;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -69,8 +71,14 @@ public class mod_LavaCow {
         PROXY.preRender();
         PROXY.registerItemAndBlockRenderers();
 
-        TinkersCompatBridge.loadTinkersCompat();
-        QuarkCompatBridge.loadQuarkCompat();
+        if(CompatUtilBridge.isTinkersConstructLoaded()){
+            TinkersCompatClient.preInit();
+            TinkersCompat.init();
+        }
+        if(CompatUtilBridge.isConstructsArmoryLoaded()) ConstructsArmoryCompat.init();
+        if(CompatUtilBridge.isQuarkLoaded()) QuarkCompat.init();
+        if(CompatUtilBridge.isRLCombatLoaded()) MinecraftForge.EVENT_BUS.register(RLCombatCompat.class);
+
         PROXY.preInit(event);
 
         NETWORK_WRAPPER = NetworkRegistry.INSTANCE.newSimpleChannel(mod_LavaCow.MODID);
@@ -100,11 +108,8 @@ public class mod_LavaCow {
     public void postInit(FMLPostInitializationEvent event) {
         PROXY.postInit(event);
 
-        TinkersCompatBridge.loadTinkersPostInitCompat();
-
-        if (Loader.isModLoaded("jeresources")) {
-            ModIntegrationRegistry.registerModIntegration(new FURJERIntegration());
-        }
+        if(CompatUtilBridge.isTinkersConstructLoaded()) TinkersCompat.post();
+        if(CompatUtilBridge.isJERLoaded()) FURJERIntegration.init();
     }
 
 }

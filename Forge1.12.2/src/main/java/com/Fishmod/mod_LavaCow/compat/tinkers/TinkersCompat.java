@@ -26,7 +26,6 @@ import slimeknights.tconstruct.tools.TinkerTraits;
 
 public class TinkersCompat {
     private static final TinkersCompat INSTANCE = new TinkersCompat();
-    private static boolean registered = false;
 
     // Materials are used universally between Tinkers' Construct tools and Construct's Armory armor
     public static final Material MOLTEN_MEAT = new Material("mod_lavacow.moltenbeef", 0xFF542B);
@@ -51,17 +50,8 @@ public class TinkersCompat {
     public static final AbstractTrait UNHOLYTOUCH = new TraitUnholyTouch();
     public static final AbstractTrait AMBER_PHARAOH = new TraitAmberPharaoh();
 
-    public static void register() {
-        if (!registered) {
-            registered = true;
-            MinecraftForge.EVENT_BUS.register(INSTANCE);
-            init();
-        } else {
-            throw new RuntimeException("You can only call TinkersCompat.register() once");
-        }
-    }
-
-    private static void init() {
+    public static void init() {
+        MinecraftForge.EVENT_BUS.register(INSTANCE);
         TinkerMaterials.materials.add(MOLTEN_MEAT);
         TinkerRegistry.integrate(MOLTEN_MEAT).preInit();
         MOLTEN_MEAT.addItem(FishItems.MOLTENBEEF, 1, Material.VALUE_Ingot);

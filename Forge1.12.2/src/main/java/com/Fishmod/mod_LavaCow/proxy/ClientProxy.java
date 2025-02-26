@@ -4,7 +4,6 @@ import com.Fishmod.mod_LavaCow.client.particle.ParticalLocustSwarm;
 import com.Fishmod.mod_LavaCow.client.particle.ParticleWitherFlame;
 import com.Fishmod.mod_LavaCow.client.renders.RenderFactories;
 import com.Fishmod.mod_LavaCow.client.renders.tileentity.TileEntityScarecrowHeadRenderer;
-import com.Fishmod.mod_LavaCow.compat.TinkersCompatBridge;
 import com.Fishmod.mod_LavaCow.init.FishItems;
 import com.Fishmod.mod_LavaCow.init.Modblocks;
 import com.Fishmod.mod_LavaCow.init.Modkeys;
@@ -80,12 +79,10 @@ public class ClientProxy implements IProxy {
 	public void spawnCustomParticle(String particleName, World world, double x, double y, double z, double vecX, double vecY, double vecZ) {
 		spawnCustomParticle(particleName, world, x, y, z, vecX, vecY, vecZ, 1.0F, 1.0F, 1.0F);
 	}
-	
+
     @SideOnly(Side.CLIENT)
     @Override
-    public void preRender() {
-        TinkersCompatBridge.loadTinkersClientCompat();
-    }
+    public void preRender() { }
     
     @Override
 	public void registerItemAndBlockRenderers() {
