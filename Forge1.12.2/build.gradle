@@ -59,6 +59,7 @@ dependencies {
     implementation fg.deobf( "curse.maven:jei-${jei_version}")
 
     implementation fg.deobf("curse.maven:rlcombat-${rlcombat_version}")
+    implementation fg.deobf("curse.maven:somanyenchantments-${somanyenchantments_version}")
 }
 
 processResources {

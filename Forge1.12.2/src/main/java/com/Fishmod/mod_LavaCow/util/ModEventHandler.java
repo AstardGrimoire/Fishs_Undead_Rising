@@ -9,6 +9,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.core.SpawnUtil;
@@ -1019,27 +1021,40 @@ public class ModEventHandler {
 
     private void MendingBaubles(Item item, EntityXPOrb xpOrb, EntityPlayer player, PlayerPickupXpEvent event) {
         int Heart_Slot = baubles.api.BaublesApi.isBaubleEquipped(player, item);
+        if(Heart_Slot == -1) return;
 
-        if (Heart_Slot != -1
-                && EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, baubles.api.BaublesApi.getBaublesHandler(event.getEntityPlayer()).getStackInSlot(Heart_Slot)) > 0
-                && baubles.api.BaublesApi.getBaublesHandler(event.getEntityPlayer()).getStackInSlot(Heart_Slot).isItemDamaged()) {
-            event.setCanceled(true);
-            ItemStack itemStack = baubles.api.BaublesApi.getBaublesHandler(player).getStackInSlot(Heart_Slot);
+        ItemStack itemStack = baubles.api.BaublesApi.getBaublesHandler(event.getEntityPlayer()).getStackInSlot(Heart_Slot);
+        boolean hasMending = (EnchantmentHelper.getEnchantmentLevel(Enchantments.MENDING, itemStack) > 0);
+        boolean hasAdvancedMending = false;
+        // check for SME Advanced Mending
+        if(CompatUtilBridge.isSMELoaded() && !hasMending) hasAdvancedMending = (SoManyEnchantmentsCompat.getAdvancedMendingLevel(itemStack) > 0);
 
-            if (xpOrb.delayBeforeCanPickup == 0 && player.xpCooldown == 0) {
+        if (hasMending || hasAdvancedMending && itemStack.isItemDamaged()) {
+            if(CompatUtilBridge.isSMELoaded()) { // Handling if SME
+                float mendingModifier = hasAdvancedMending ? 1.5F : 1.0F;
+                float ratio = itemStack.getItem().getXpRepairRatio(itemStack);
+                int value = Math.min(SoManyEnchantmentsCompat.roundAverage(xpOrb.xpValue * ratio * mendingModifier), itemStack.getItemDamage());
+                xpOrb.xpValue -= SoManyEnchantmentsCompat.roundAverage(value / ratio);
+                itemStack.setItemDamage(itemStack.getItemDamage() - value);
+                if (xpOrb.xpValue < 0) xpOrb.xpValue = 0;
+            }
+            else { // Original Handling
+                event.setCanceled(true);
+                if (xpOrb.delayBeforeCanPickup == 0 && player.xpCooldown == 0) {
 
-                player.xpCooldown = 2;
-                player.onItemPickup(xpOrb, 1);
-                int i = Math.min(xpOrb.xpValue * 2, itemStack.getItemDamage());
-                xpOrb.xpValue -= i / 2;
+                    player.xpCooldown = 2;
+                    player.onItemPickup(xpOrb, 1);
+                    int i = Math.min(xpOrb.xpValue * 2, itemStack.getItemDamage());
+                    xpOrb.xpValue -= i / 2;
 
-                itemStack.setItemDamage(itemStack.getItemDamage() - i);
+                    itemStack.setItemDamage(itemStack.getItemDamage() - i);
 
-                if (xpOrb.xpValue > 0) {
-                    player.addExperience(xpOrb.xpValue);
+                    if (xpOrb.xpValue > 0) {
+                        player.addExperience(xpOrb.xpValue);
+                    }
+
+                    xpOrb.setDead();
                 }
-
-                xpOrb.setDead();
             }
         }
     }
