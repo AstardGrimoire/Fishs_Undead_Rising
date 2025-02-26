@@ -20,33 +20,27 @@ public class CompatUtilBridge {
 
 
     public static boolean isQuarkLoaded() {
-        if(!(Modconfig.Quark_Compat)) return false;
-        if(isQuarkLoaded == null) isQuarkLoaded = Loader.isModLoaded(QUARK_MODID);
+        if(isQuarkLoaded == null) isQuarkLoaded = Modconfig.Quark_Compat && Loader.isModLoaded(QUARK_MODID);
         return isQuarkLoaded;
     }
 
     public static boolean isRLCombatLoaded() {
-        if(!(Modconfig.RLCombat_Compat)) return false;
-        if(isRLCombatLoaded == null) isRLCombatLoaded = Loader.isModLoaded(RLCOMBAT_MODID);
+        if(isRLCombatLoaded == null) isRLCombatLoaded = Modconfig.RLCombat_Compat && Loader.isModLoaded(RLCOMBAT_MODID);
         return isRLCombatLoaded;
     }
 
     public static boolean isSMELoaded() {
-        if(!(Modconfig.SME_Compat)) return false;
-        if(isSMELoaded == null) isSMELoaded = Loader.isModLoaded(SO_MANY_ENCHANTMETS_MODID);
+        if(isSMELoaded == null) isSMELoaded = Modconfig.SME_Compat && Loader.isModLoaded(SO_MANY_ENCHANTMETS_MODID);
         return isSMELoaded;
     }
 
     public static boolean isTinkersConstructLoaded() {
-        if(!(Modconfig.Tinkers_Compat)) return false;
-        if(isTinkersConstructLoaded == null) isTinkersConstructLoaded = Loader.isModLoaded(TINKERS_CONSTRUCT_MODID);
+        if(isTinkersConstructLoaded == null) isTinkersConstructLoaded = Modconfig.Tinkers_Compat && Loader.isModLoaded(TINKERS_CONSTRUCT_MODID);
         return isTinkersConstructLoaded;
     }
 
     public static boolean isConstructsArmoryLoaded() {
-        if(!(isTinkersConstructLoaded())) return false;
-        if(!(Modconfig.Tinkers_Compat)) return false;
-        if(isConstructsArmoryLoaded == null) isConstructsArmoryLoaded = Loader.isModLoaded(CONSTRUCTS_ARMORY_MODID);
+        if(isConstructsArmoryLoaded == null) isConstructsArmoryLoaded = Modconfig.Tinkers_Armor_Compat && isTinkersConstructLoaded() && Loader.isModLoaded(CONSTRUCTS_ARMORY_MODID);
         return isConstructsArmoryLoaded;
     }
 
