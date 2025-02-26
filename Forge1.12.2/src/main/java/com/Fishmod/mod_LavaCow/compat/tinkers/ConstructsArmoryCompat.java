@@ -12,7 +12,6 @@ import slimeknights.tconstruct.library.TinkerRegistry;
 
 public class ConstructsArmoryCompat {
     private static final ConstructsArmoryCompat INSTANCE = new ConstructsArmoryCompat();
-    private static boolean registered = false;
 
     // These traits are for Construct's Armory armor and not Tinkers' Construct tools
     public static final AbstractArmorTrait BROODMOTHER_ARMOR = new TraitBroodMotherArmor();
@@ -21,18 +20,9 @@ public class ConstructsArmoryCompat {
     public static final AbstractArmorTrait VESPA_WARD_ARMOR = new TraitVespaWardArmor();
     public static final AbstractArmorTrait AMBER_PHARAOH_ARMOR = new TraitAmberPharaohArmor();
 
-    public static void register() {
-        if (!registered) {
-            registered = true;
-            MinecraftForge.EVENT_BUS.register(INSTANCE);
-            init();
-        } else {
-            throw new RuntimeException("You can only call ConstructsArmoryCompat.register() once");
-        }
-    }
-
     // Materials are already registered in TinkersCompat.class, this only adds support for Construct's Armory armor
-    private static void init() {
+    public static void init() {
+        MinecraftForge.EVENT_BUS.register(INSTANCE);
         TinkerRegistry.addMaterialStats(TinkersCompat.MOLTEN_MEAT,
                 new CoreMaterialStats(10.0F, 14.0F),
                 new PlatesMaterialStats(1.0F, 6.0F, 1.0F),

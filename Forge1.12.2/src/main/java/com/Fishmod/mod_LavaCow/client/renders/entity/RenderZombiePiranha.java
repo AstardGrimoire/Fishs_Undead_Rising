@@ -20,7 +20,7 @@ public class RenderZombiePiranha extends RenderLiving<EntityZombiePiranha>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderZombiePiranha(RenderManager rendermanagerIn) {

@@ -2,7 +2,8 @@ package com.Fishmod.mod_LavaCow.util;
 
 import java.lang.reflect.Field;
 
-import com.Fishmod.mod_LavaCow.compat.TinkersCompatBridge;
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompatClient;
 import com.Fishmod.mod_LavaCow.init.FishItems;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -32,8 +33,8 @@ public class ModelRegistryHandler {
 				e.printStackTrace();
 			}
         }
-        
-        TinkersCompatBridge.loadTinkersClientModels(event);
+
+		if(CompatUtilBridge.isTinkersConstructLoaded()) TinkersCompatClient.registerModels(event);
     }
  
     private static void registerModel(Item item) {

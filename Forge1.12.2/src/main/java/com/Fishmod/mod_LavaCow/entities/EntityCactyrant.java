@@ -521,7 +521,7 @@ public class EntityCactyrant extends EntityMob implements IAggressive {
 	            d2 = target.posZ - EntityCactyrant.this.posZ;
 	            d3 = (double)MathHelper.sqrt(d0 * d0 + d2 * d2);
 	            f = i == 3 ? 0 : MathHelper.sqrt(MathHelper.sqrt(d3)) * 2.0D;
-	            abstractarrowentity.shoot(d0 + EntityCactyrant.this.rand.nextGaussian() * f, d1 + d3 * 0.2D, d2 + EntityCactyrant.this.rand.nextGaussian() * f, 1.6F, (float)(14 - EntityCactyrant.this.world.getDifficulty().getDifficultyId() * 4));            
+	            abstractarrowentity.shoot(d0 + EntityCactyrant.this.rand.nextGaussian() * f, d1 + d3 * 0.2D, d2 + EntityCactyrant.this.rand.nextGaussian() * f, 1.6F, (float)(14 - EntityCactyrant.this.world.getDifficulty().getId() * 4));
 	            EntityCactyrant.this.world.spawnEntity(abstractarrowentity);
         	}
         	EntityCactyrant.this.playSound(FishItems.RANDOM_THORN_SHOOT, 1.0F, 1.0F / (EntityCactyrant.this.rand.nextFloat() * 0.4F + 0.8F));

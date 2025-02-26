@@ -15,7 +15,7 @@ public class RenderAmberLord extends RenderLiving<EntityAmberLord> {
 	
 	static {
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderAmberLord(RenderManager rendermanagerIn) {

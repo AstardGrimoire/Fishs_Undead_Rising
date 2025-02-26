@@ -52,23 +52,23 @@ public class RegistryHandler {
         }
     	
     	event.getRegistry().registerAll(               
-                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM), Modblocks.GLOWSHROOM.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.PILEOFSLUDGE), Modblocks.PILEOFSLUDGE.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM_BLOCK_STEM), Modblocks.GLOWSHROOM_BLOCK_STEM.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM_BLOCK_CAP), Modblocks.GLOWSHROOM_BLOCK_CAP.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.BLOODTOOTH_SHROOM), Modblocks.BLOODTOOTH_SHROOM.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.CORDY_SHROOM), Modblocks.CORDY_SHROOM.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.VEIL_SHROOM), Modblocks.VEIL_SHROOM.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_COMMON), Modblocks.SCARECROWHEAD_COMMON.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_STRAW), Modblocks.SCARECROWHEAD_STRAW.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_PLAGUE), Modblocks.SCARECROWHEAD_PLAGUE.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.TOMBSTONE), Modblocks.TOMBSTONE.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.CACTOID_SPROUT), Modblocks.CACTOID_SPROUT.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.ECTOPLASM_BLOCK), Modblocks.ECTOPLASM_BLOCK.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.MOLTEN_ALLOY_BLOCK), Modblocks.MOLTEN_ALLOY_BLOCK.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.SCYTHE_CLAW_BLOCK), Modblocks.SCYTHE_CLAW_BLOCK.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.VESPA_CARAPACE_BLOCK), Modblocks.VESPA_CARAPACE_BLOCK.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
-                BlockBasic.setItemName(new ItemBlock(Modblocks.MOLTEN_MEAT_BLOCK), Modblocks.MOLTEN_MEAT_BLOCK.getRegistryName().getResourcePath()).setCreativeTab(mod_LavaCow.TAB_ITEMS)
+                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM), Modblocks.GLOWSHROOM.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.PILEOFSLUDGE), Modblocks.PILEOFSLUDGE.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM_BLOCK_STEM), Modblocks.GLOWSHROOM_BLOCK_STEM.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.GLOWSHROOM_BLOCK_CAP), Modblocks.GLOWSHROOM_BLOCK_CAP.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.BLOODTOOTH_SHROOM), Modblocks.BLOODTOOTH_SHROOM.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.CORDY_SHROOM), Modblocks.CORDY_SHROOM.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.VEIL_SHROOM), Modblocks.VEIL_SHROOM.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_COMMON), Modblocks.SCARECROWHEAD_COMMON.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_STRAW), Modblocks.SCARECROWHEAD_STRAW.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemScarecrowHead(Modblocks.SCARECROWHEAD_PLAGUE), Modblocks.SCARECROWHEAD_PLAGUE.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.TOMBSTONE), Modblocks.TOMBSTONE.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.CACTOID_SPROUT), Modblocks.CACTOID_SPROUT.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.ECTOPLASM_BLOCK), Modblocks.ECTOPLASM_BLOCK.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.MOLTEN_ALLOY_BLOCK), Modblocks.MOLTEN_ALLOY_BLOCK.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.SCYTHE_CLAW_BLOCK), Modblocks.SCYTHE_CLAW_BLOCK.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.VESPA_CARAPACE_BLOCK), Modblocks.VESPA_CARAPACE_BLOCK.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS),
+                BlockBasic.setItemName(new ItemBlock(Modblocks.MOLTEN_MEAT_BLOCK), Modblocks.MOLTEN_MEAT_BLOCK.getRegistryName().getPath()).setCreativeTab(mod_LavaCow.TAB_ITEMS)
         );
     }
     

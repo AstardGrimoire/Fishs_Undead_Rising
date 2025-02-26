@@ -26,7 +26,7 @@ public class ItemChitinArmor extends ItemArmor {
 	public ItemChitinArmor(String registryName, int renderIndex, EntityEquipmentSlot slot) {
 		super(FishItems.ARMOR_CHITIN, renderIndex, slot);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
 
 		if (registryName.equals("chitinarmor_leggings")) {

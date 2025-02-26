@@ -44,7 +44,7 @@ public class SpawnUtil {
     public static BlockPos getHeight(Entity entityIn) {
     	World worldIn = entityIn.getEntityWorld();
     	BlockPos pos = entityIn.getPosition();
-    	Chunk chunk = worldIn.getChunkFromBlockCoords(pos);  	
+    	Chunk chunk = worldIn.getChunk(pos);
     	BlockPos blockpos, blockpos1;
 
     	if (chunk == null) {

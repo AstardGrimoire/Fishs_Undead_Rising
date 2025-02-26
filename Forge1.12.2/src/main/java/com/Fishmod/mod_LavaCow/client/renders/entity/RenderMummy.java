@@ -19,7 +19,7 @@ public class RenderMummy extends RenderLiving<EntityMummy> {
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 	
     public ModelUnburied getMainModel()

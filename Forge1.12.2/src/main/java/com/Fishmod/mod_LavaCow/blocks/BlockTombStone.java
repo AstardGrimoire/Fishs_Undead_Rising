@@ -116,14 +116,6 @@ public class BlockTombStone extends Block{
     {
         return true;
     }
-    
-    /**
-     * Convert the given metadata into a BlockState for this Block
-     */
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta & 7));
-    }
 
     /**
      * Convert the BlockState into the correct metadata value

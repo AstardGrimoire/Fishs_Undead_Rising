@@ -39,7 +39,7 @@ public class ItemFelArmor extends ItemArmor {
 	public ItemFelArmor(String registryName, int renderIndex, EntityEquipmentSlot slot, float effectlevelIn) {
 		super(FishItems.ARMOR_FEL, renderIndex, slot);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         this.effectlevel = effectlevelIn * 0.2F;
         this.fireprooflevel = effectlevelIn * 0.5F;

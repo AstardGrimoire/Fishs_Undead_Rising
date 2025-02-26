@@ -55,7 +55,7 @@ public class StructureUtil {
     }
     
     public static void GenStructureWithLoot(ResourceLocation structure, ResourceLocation loot, World world, BlockPos pos) {
-        EnumFacing facing = EnumFacing.getHorizontal(world.rand.nextInt(4));
+        EnumFacing facing = EnumFacing.byHorizontalIndex(world.rand.nextInt(4));
         Rotation rotation = getRotationFromFacing(facing);
         MinecraftServer server = world.getMinecraftServer();
         TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();
@@ -66,7 +66,7 @@ public class StructureUtil {
     }
     
 	public static void GenDesertTomb(ResourceLocation structure, ResourceLocation loot, World world, BlockPos pos) {
-        EnumFacing facing = EnumFacing.getHorizontal(world.rand.nextInt(4));
+        EnumFacing facing = EnumFacing.byHorizontalIndex(world.rand.nextInt(4));
         Rotation rotation = getRotationFromFacing(facing);
         MinecraftServer server = world.getMinecraftServer();
         TemplateManager templateManager = world.getSaveHandler().getStructureTemplateManager();

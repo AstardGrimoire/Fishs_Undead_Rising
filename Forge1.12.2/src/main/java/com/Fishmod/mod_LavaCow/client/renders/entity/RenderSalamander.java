@@ -24,7 +24,7 @@ public class RenderSalamander extends RenderLiving<EntitySalamander>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderSalamander(RenderManager rendermanagerIn) {

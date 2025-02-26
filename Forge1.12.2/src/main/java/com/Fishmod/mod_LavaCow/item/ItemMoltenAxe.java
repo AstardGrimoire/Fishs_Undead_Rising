@@ -30,7 +30,7 @@ public class ItemMoltenAxe extends ItemAxe {
 
 	public ItemMoltenAxe(String registryName) {
 		super(FishItems.TOOL_MOLTEN, 9.0F, -3.0F);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         this.setCreativeTab(mod_LavaCow.TAB_ITEMS);
 	}

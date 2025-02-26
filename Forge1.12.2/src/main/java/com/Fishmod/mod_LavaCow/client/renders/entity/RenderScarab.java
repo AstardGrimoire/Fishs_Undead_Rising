@@ -17,7 +17,7 @@ public class RenderScarab extends RenderLiving<EntityScarab> {
 	
 	static {
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderScarab(RenderManager rendermanagerIn) {

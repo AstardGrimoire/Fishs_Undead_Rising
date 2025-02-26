@@ -18,7 +18,7 @@ public class RenderZombieFrozen extends RenderLiving<EntityZombieFrozen> {
 	private static ResourceLocation TEXTURES_EYE = new ResourceLocation("mod_lavacow:textures/mobs/unburied/unburied1_eyes.png");
 	private static ResourceLocation TEXTURES = new ResourceLocation("mod_lavacow:textures/mobs/unburied/unburied1.png");
 	static{
-        System.out.println(TEXTURES.getResourcePath());
+        System.out.println(TEXTURES.getPath());
     }
 
     public RenderZombieFrozen(RenderManager rendermanagerIn) {

@@ -14,7 +14,7 @@ public class RenderEnigmoth extends RenderLiving<EntityEnigmoth> {
 	private static final ResourceLocation TEXTURES_EYES = new ResourceLocation("mod_lavacow:textures/mobs/enigmoth/enigmoth_eyes.png");
 	
 	static {
-		System.out.println(TEXTURES.getResourcePath());
+		System.out.println(TEXTURES.getPath());
     }
 
     public RenderEnigmoth(RenderManager rendermanagerIn) {

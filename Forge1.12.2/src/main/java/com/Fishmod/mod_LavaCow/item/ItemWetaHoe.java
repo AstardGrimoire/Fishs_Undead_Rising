@@ -31,7 +31,7 @@ public class ItemWetaHoe extends ItemHoe {
     public ItemWetaHoe(String registryName) {
         super(FishItems.TOOL_WETA);
         this.setCreativeTab(mod_LavaCow.TAB_ITEMS);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
     }
 

@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.rlcombat.RLCombatCompat;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.entities.EntityMummy;
@@ -74,7 +76,7 @@ public class ItemFishCustomWeapon extends ItemSword {
 
     public ItemFishCustomWeapon(String registryName, ToolMaterial materialIn, float damageIn, float attackspeedIn, Item repair, EnumRarity rarity) {
         super(materialIn);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         setCreativeTab(mod_LavaCow.TAB_ITEMS);
         this.Damage = 3.0F + damageIn;
@@ -162,7 +164,8 @@ public class ItemFishCustomWeapon extends ItemSword {
     	
         float f = (float) attacker.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue();
 
-        if (attacker instanceof EntityPlayer && stack.getItem() == FishItems.REAPERS_SCYTHE) {
+        if (attacker instanceof EntityPlayer && stack.getItem() == FishItems.REAPERS_SCYTHE
+            && !(CompatUtilBridge.isRLCombatLoaded())) { //Handle RLCombat separately using Sweep event
             float f3 = 1.0F + EnchantmentHelper.getSweepingDamageRatio(attacker) * f;
 
             for (EntityLivingBase entitylivingbase : attacker.world.getEntitiesWithinAABB(EntityLivingBase.class, target.getEntityBoundingBox().grow(2.0D, 0.25D, 2.0D))) {
@@ -183,24 +186,24 @@ public class ItemFishCustomWeapon extends ItemSword {
             target.playSound(SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.85F);
 
             // Stacks with Fire Aspect
-            target.setFire(8 + 4 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
+            target.setFire(8 + 4 * EnchantmentHelper.getFireAspectModifier(attacker));
         } else if (stack.getItem() == FishItems.SOULFORGED_HAMMER) {
             target.playSound(SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.85F);
 
             // Stacks with Fire Aspect
-            target.setFire(10 + 5 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
-            target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())), 2));
+            target.setFire(10 + 5 * EnchantmentHelper.getFireAspectModifier(attacker));
+            target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getFireAspectModifier(attacker), 2));
         } else if (stack.getItem() == FishItems.MOLTENPAN) {
             target.playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1.0F, 0.75F);
 
             // Stacks with Fire Aspect
-            target.setFire(8 + 4 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
+            target.setFire(8 + 4 * EnchantmentHelper.getFireAspectModifier(attacker));
         } else if (stack.getItem() == FishItems.SOULFORGED_PAN) {
             target.playSound(SoundEvents.BLOCK_ANVIL_PLACE, 1.0F, 0.75F);
 
             // Stacks with Fire Aspect
-            target.setFire(10 + 5 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
-            target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())), 2));
+            target.setFire(10 + 5 * EnchantmentHelper.getFireAspectModifier(attacker));
+            target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getFireAspectModifier(attacker), 2));
         } else if (stack.getItem() == FishItems.SKELETONKING_MACE) {
             target.playSound(SoundEvents.ENTITY_ZOMBIE_ATTACK_IRON_DOOR, 1.0F, 0.5F);
             target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 300, 2));
@@ -239,11 +242,21 @@ public class ItemFishCustomWeapon extends ItemSword {
      * Called when the equipped item is right clicked.
      */
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        int fire_aspect = EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, playerIn.getHeldItem(handIn));
-        int sharpness = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, playerIn.getHeldItem(handIn));
-        int knockback = EnchantmentHelper.getEnchantmentLevel(Enchantments.KNOCKBACK, playerIn.getHeldItem(handIn));
-        int bane_of_arthropods = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, playerIn.getHeldItem(handIn));
-        int smite = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, playerIn.getHeldItem(handIn));
+        int fire_aspect = EnchantmentHelper.getFireAspectModifier(playerIn);
+        int knockback = EnchantmentHelper.getKnockbackModifier(playerIn);
+        int sharpness;
+        int bane_of_arthropods;
+        int smite;
+        if(CompatUtilBridge.isSMELoaded()) { // Scale with Lesser, Advanced, and Supreme Sharpness
+            sharpness = (int) ((EnchantmentHelper.getModifierForCreature(playerIn.getHeldItem(handIn), EnumCreatureAttribute.UNDEFINED) - 0.5) / 0.5);
+            bane_of_arthropods = (int) (EnchantmentHelper.getModifierForCreature(playerIn.getHeldItem(handIn), EnumCreatureAttribute.ARTHROPOD) / 2.5);
+            smite = (int) (EnchantmentHelper.getModifierForCreature(playerIn.getHeldItem(handIn), EnumCreatureAttribute.UNDEAD) / 2.5);
+        }
+        else{ // Only checks vanilla Sharpness
+            sharpness = EnchantmentHelper.getEnchantmentLevel(Enchantments.SHARPNESS, playerIn.getHeldItem(handIn));
+            bane_of_arthropods = EnchantmentHelper.getEnchantmentLevel(Enchantments.BANE_OF_ARTHROPODS, playerIn.getHeldItem(handIn));
+            smite = EnchantmentHelper.getEnchantmentLevel(Enchantments.SMITE, playerIn.getHeldItem(handIn));
+        }
         int lifesteal = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.LIFESTEAL, playerIn.getHeldItem(handIn));
         int poisonous = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.POISONOUS, playerIn.getHeldItem(handIn));
         int corrosive = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CORROSIVE, playerIn.getHeldItem(handIn));

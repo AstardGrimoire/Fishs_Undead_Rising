@@ -31,7 +31,7 @@ public class ItemGhostlyArmor extends ItemArmor {
 	public ItemGhostlyArmor(String registryName, int renderIndex, EntityEquipmentSlot slot) {
 		super(FishItems.ARMOR_GHOSTLY, renderIndex, slot);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         
         this.maxHealth = new AttributeModifier("2AD3F246-FEE1-4E67-B886-69FD380BB150", HEALTH_ADDITION[slot.getIndex()], 0);

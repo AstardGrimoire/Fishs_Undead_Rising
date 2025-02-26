@@ -299,6 +299,8 @@ public class Modconfig {
     public static boolean Tinkers_Compat;
     public static boolean Tinkers_Armor_Compat;
     public static boolean Quark_Compat;
+    public static boolean RLCombat_Compat;
+    public static boolean SME_Compat;
     public static boolean SunScreen_Mode;
     public static int SpawnRate_Cemetery;
     public static int BoneSword_DamageCap;
@@ -789,6 +791,8 @@ public class Modconfig {
         Tinkers_Compat = config.get(Configuration.CATEGORY_GENERAL, "tinkers' construct integration", true, "Should new tool materials be added to Tinkers' Construct when installed? [false/true]").getBoolean(true);
         Tinkers_Armor_Compat = config.get(Configuration.CATEGORY_GENERAL, "construct's armory integration", true, "Should new armor materials be added to Construct's Armory when installed? (requires Tinkers' Construct) [false/true]").getBoolean(true);
         Quark_Compat = config.get(Configuration.CATEGORY_GENERAL, "quark integration", true, "Should new features be added when Quark is also installed? [false/true]").getBoolean(true);
+        RLCombat_Compat = config.get(Configuration.CATEGORY_GENERAL, "rlcombat integration", true, "Should Azrael's Scythe use RLCombat for handling? [false/true]").getBoolean(true);
+        SME_Compat = config.get(Configuration.CATEGORY_GENERAL, "somanyenchantments integration", true, "Should So Many Enchantment's Lesser, Advanced, and Supreme Enchants be considered? [false/true]").getBoolean(true);
         SunScreen_Mode = config.get(Configuration.CATEGORY_GENERAL, "sunscreen mode", false, "Mobs in this mod will not burn under daylight. [false/true]").getBoolean(false);
 
         SpawnRate_Cemetery = config.get(Configuration.CATEGORY_GENERAL, "cemetery spawn rate", 500, "Spawn rate of Cemetery (higher number = less frequent) [1-10000]", 1, 10000).getInt(500);

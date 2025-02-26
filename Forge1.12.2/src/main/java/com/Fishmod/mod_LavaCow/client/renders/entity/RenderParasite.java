@@ -24,7 +24,7 @@ public class RenderParasite extends RenderLiving<EntityParasite>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 	
     public RenderParasite(RenderManager rendermanagerIn) {

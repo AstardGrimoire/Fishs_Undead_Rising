@@ -16,8 +16,8 @@ public class CreativeTab extends CreativeTabs {
         return false;
     }
 
-	@Override
-	public ItemStack getTabIconItem() {
+    @Override
+    public ItemStack createIcon() {
 		return new ItemStack(FishItems.UNDYINGHEART);
 	}
 

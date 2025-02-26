@@ -16,7 +16,7 @@ public class RenderSeaHag extends RenderLiving<EntitySeaHag>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderSeaHag(RenderManager rendermanagerIn) {

@@ -60,7 +60,7 @@ public class ItemRavenWhistle extends ItemFishCustom {
     {
         Vec3d vec3d = playerIn.getPositionEyes(1.0F);
         Vec3d vec3d1 = playerIn.getLook(1.0F);
-        Vec3d vec3d2 = vec3d.addVector(vec3d1.x * 30.0D, vec3d1.y * 30.0D, vec3d1.z * 30.0D);
+        Vec3d vec3d2 = vec3d .add(vec3d1.x * 30.0D, vec3d1.y * 30.0D, vec3d1.z * 30.0D);
         BlockPos pos = worldIn.rayTraceBlocks(vec3d, vec3d2, false, false, true).getBlockPos();
         
         if(this.OrderEntityID != null) { 	

@@ -18,7 +18,7 @@ public class RenderScarecrow extends RenderLiving<EntityScarecrow>{
 	};
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
 	public RenderScarecrow(RenderManager rendermanagerIn) {

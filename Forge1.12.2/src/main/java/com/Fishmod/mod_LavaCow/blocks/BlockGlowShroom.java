@@ -102,9 +102,9 @@ public class BlockGlowShroom extends BlockMushroom{
 	         BlockPos blockpos = pos.offset(enumfacing);
 	         if (!worldIn.getBlockState(blockpos).isOpaqueCube() && worldIn.isRemote) {
 	            EnumFacing.Axis enumfacing$axis = enumfacing.getAxis();
-	            double d1 = enumfacing$axis == EnumFacing.Axis.X ? 0.5D + 0.5625D * (double)enumfacing.getFrontOffsetX() : (double)random.nextFloat();
-	            double d2 = enumfacing$axis == EnumFacing.Axis.Y ? 0.5D + 0.5625D * (double)enumfacing.getFrontOffsetY() : (double)random.nextFloat();
-	            double d3 = enumfacing$axis == EnumFacing.Axis.Z ? 0.5D + 0.5625D * (double)enumfacing.getFrontOffsetZ() : (double)random.nextFloat();
+	            double d1 = enumfacing$axis == EnumFacing.Axis.X ? 0.5D + 0.5625D * (double)enumfacing.getXOffset() : (double)random.nextFloat();
+	            double d2 = enumfacing$axis == EnumFacing.Axis.Y ? 0.5D + 0.5625D * (double)enumfacing.getYOffset() : (double)random.nextFloat();
+	            double d3 = enumfacing$axis == EnumFacing.Axis.Z ? 0.5D + 0.5625D * (double)enumfacing.getZOffset() : (double)random.nextFloat();
 	            mod_LavaCow.PROXY.spawnCustomParticle("spore", worldIn, (double)pos.getX() + d1, (double)pos.getY() + d2, (double)pos.getZ() + d3, 0.0D, 0.0D, 0.0D, 0.0F, 0.98F, 0.93F);
 	         }
 	      }

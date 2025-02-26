@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuarkCompat {
-    private static boolean registered = false;
     private static final String[] QUARK_TEXTURES = {
             "quark:textures/blocks/chests/acacia.png",
             "quark:textures/blocks/chests/birch.png",
@@ -15,16 +14,7 @@ public class QuarkCompat {
             "quark:textures/blocks/chests/spruce.png"
     };
 
-    public static void register() {
-        if (!registered) {
-            registered = true;
-            init();
-        } else {
-            throw new RuntimeException("You can only call QuarkCompat.register() once");
-        }
-    }
-
-    private static void init() {
+    public static void init() {
         addQuarkMimics();
     }
 

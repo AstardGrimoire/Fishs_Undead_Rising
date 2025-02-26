@@ -32,7 +32,7 @@ public class ItemSoulforgedAxe extends ItemAxe {
 
 	public ItemSoulforgedAxe(String registryName) {
 		super(FishItems.TOOL_SOULFORGED, 10.5F, -2.8F);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         this.setCreativeTab(mod_LavaCow.TAB_ITEMS);
 	}
