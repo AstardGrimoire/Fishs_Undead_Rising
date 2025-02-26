@@ -22,7 +22,7 @@ public class RenderRaven extends RenderLiving<EntityRaven>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderRaven(RenderManager rendermanagerIn) {

@@ -17,7 +17,7 @@ public class ItemMoltenBeef extends ItemFlintAndSteel
 	
 	public ItemMoltenBeef(String registryName) {
     	super();
-    	this.setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+    	this.setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         this.setRegistryName(registryName);
         this.setCreativeTab(mod_LavaCow.TAB_ITEMS);
         this.setMaxDamage(0);

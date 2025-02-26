@@ -74,7 +74,7 @@ public class ItemFishCustomWeapon extends ItemSword {
 
     public ItemFishCustomWeapon(String registryName, ToolMaterial materialIn, float damageIn, float attackspeedIn, Item repair, EnumRarity rarity) {
         super(materialIn);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         setCreativeTab(mod_LavaCow.TAB_ITEMS);
         this.Damage = 3.0F + damageIn;

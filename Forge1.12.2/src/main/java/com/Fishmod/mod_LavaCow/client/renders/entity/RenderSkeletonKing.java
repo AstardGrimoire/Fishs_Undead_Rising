@@ -17,7 +17,7 @@ public class RenderSkeletonKing extends RenderLiving<EntitySkeletonKing> {
 	
 	static {
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
 	public RenderSkeletonKing(RenderManager rendermanagerIn) {

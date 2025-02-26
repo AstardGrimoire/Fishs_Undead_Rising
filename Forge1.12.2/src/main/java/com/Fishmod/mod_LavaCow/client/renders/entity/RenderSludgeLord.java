@@ -16,7 +16,7 @@ public class RenderSludgeLord extends RenderLiving<EntitySludgeLord> {
 	
 	static {
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderSludgeLord(RenderManager rendermanagerIn) {

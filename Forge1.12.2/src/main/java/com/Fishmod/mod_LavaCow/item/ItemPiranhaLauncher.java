@@ -52,7 +52,7 @@ public class ItemPiranhaLauncher extends ItemBow {
 	        this.Tooltip = "tootip." + mod_LavaCow.MODID + "." + registryName;
 	        this.setMaxDamage(384);
 	        this.setCreativeTab(CreativeTabs.COMBAT);
-	        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+	        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
 	        setRegistryName(registryName);
 		}
 		
@@ -64,7 +64,7 @@ public class ItemPiranhaLauncher extends ItemBow {
 	        this.Tooltip = "tootip." + mod_LavaCow.MODID + "." + registryName;
 	        this.setMaxDamage(384);
 	        this.setCreativeTab(CreativeTabs.COMBAT);
-	        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+	        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
 	        setRegistryName(registryName);
 		}
 		

@@ -31,7 +31,7 @@ public class ItemSwineArmor extends ItemArmor {
 	public ItemSwineArmor(String registryName, int renderIndex, EntityEquipmentSlot slot, float effectlevelIn) {
 		super(FishItems.ARMOR_SWINE, renderIndex, slot);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
 
 		if (registryName.equals("swinemask"))

@@ -12,7 +12,7 @@ public class RenderUndeadSwine extends RenderLiving<EntityUndeadSwine>{
 	
 	private static ResourceLocation TEXTURES = new ResourceLocation("mod_lavacow:textures/mobs/undeadswine.png");
 	static{
-        System.out.println(TEXTURES.getResourcePath());
+        System.out.println(TEXTURES.getPath());
     }
 
     public RenderUndeadSwine(RenderManager rendermanagerIn) {

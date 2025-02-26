@@ -39,7 +39,7 @@ public class ItemSoulforgedArmor extends ItemArmor {
 	public ItemSoulforgedArmor(String registryName, int renderIndex, EntityEquipmentSlot slot, float effectlevelIn) {
 		super(FishItems.ARMOR_SOULFORGED, renderIndex, slot);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         this.effectlevel = effectlevelIn * 0.4F;
         this.fireprooflevel = effectlevelIn * 1.0F;

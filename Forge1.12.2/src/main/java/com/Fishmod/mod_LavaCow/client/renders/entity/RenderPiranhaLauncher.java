@@ -13,7 +13,7 @@ public class RenderPiranhaLauncher extends Render<EntityPiranhaLauncher>{
 	private final ModelZombiePiranha skeletonHeadModel = new ModelZombiePiranha();
 	private static ResourceLocation TEXTURES = new ResourceLocation("mod_lavacow:textures/mobs/swarmer/swarmer.png");
 	static{
-        System.out.println(TEXTURES.getResourcePath());
+        System.out.println(TEXTURES.getPath());
     }
 
     public RenderPiranhaLauncher(RenderManager rendermanagerIn) {

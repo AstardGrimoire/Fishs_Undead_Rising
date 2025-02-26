@@ -20,7 +20,7 @@ public class RenderLavaCow extends RenderLiving<EntityLavaCow> {
 
     static {
         for (ResourceLocation texture : TEXTURES)
-            System.out.println(texture.getResourcePath());
+            System.out.println(texture.getPath());
     }
 
     public RenderLavaCow(RenderManager rendermanagerIn) {

@@ -26,7 +26,7 @@ public class ItemIllagerNose extends ItemArmor {
 
     public ItemIllagerNose(String registryName, int renderIndexIn, EntityEquipmentSlot equipmentSlotIn) {
         super(FishItems.ARMOR_ILLAGER_NOSE, renderIndexIn, equipmentSlotIn);
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
     }
 

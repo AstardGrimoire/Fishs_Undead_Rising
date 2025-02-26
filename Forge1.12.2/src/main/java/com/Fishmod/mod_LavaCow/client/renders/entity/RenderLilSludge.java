@@ -15,13 +15,13 @@ public class RenderLilSludge extends RenderLiving<EntityLilSludge>{
 
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderLilSludge(RenderManager rendermanagerIn) {
     	super(rendermanagerIn, new ModelLilSludge(), 0.5F);
     }
-    
+
     @Override
     protected ResourceLocation getEntityTexture(EntityLilSludge entity) {
 		return TEXTURES[entity.getSkin()];

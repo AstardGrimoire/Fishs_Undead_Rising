@@ -18,7 +18,7 @@ public class RenderImp extends RenderLiving<EntityImp> {
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 	
     public RenderImp(RenderManager rendermanagerIn) {

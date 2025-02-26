@@ -25,7 +25,7 @@ public class ItemFishCustom extends Item {
 	
 	public ItemFishCustom(String registryName, Item afteruse, CreativeTabs tab, boolean hasTooltip) {
     	super();
-        setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+        setTranslationKey(mod_LavaCow.MODID + "." + registryName);
         setRegistryName(registryName);
         setCreativeTab(tab);
         return_item = afteruse;

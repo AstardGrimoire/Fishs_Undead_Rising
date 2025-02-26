@@ -31,7 +31,7 @@ public class ItemVespaShield extends ItemShield {
 	{
 		super();
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
 		this.setMaxDamage(504);
         setRegistryName(registryName);
 	}

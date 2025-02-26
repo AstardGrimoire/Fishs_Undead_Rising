@@ -10,21 +10,21 @@ public class BlockBasic extends Block {
 
 	public BlockBasic(String name, Material material) {
 		super(material);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setRegistryName(name);
 	}
 	
     public static Item setItemName(Item parItem, String parItemName)
     {
         parItem.setRegistryName(parItemName);
-        parItem.setUnlocalizedName(parItemName);
+        parItem.setTranslationKey(parItemName);
         return parItem;
     }
 	
     public static Block setBlockName(Block parBlock, String parBlockName)
     {
         parBlock.setRegistryName(parBlockName);
-        parBlock.setUnlocalizedName(mod_LavaCow.MODID + "." + parBlockName);
+        parBlock.setTranslationKey(mod_LavaCow.MODID + "." + parBlockName);
         return parBlock;
     }
 }

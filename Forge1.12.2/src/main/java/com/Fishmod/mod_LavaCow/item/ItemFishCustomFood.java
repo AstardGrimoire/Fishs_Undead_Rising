@@ -46,7 +46,7 @@ public class ItemFishCustomFood extends ItemFood {
 	
 	public ItemFishCustomFood(String registryName, int amount, float saturation, boolean isWolfFood, int duration, boolean hasTooltip) {
 		super(amount, saturation, isWolfFood);
-		setUnlocalizedName(mod_LavaCow.MODID + "." + registryName);
+		setTranslationKey(mod_LavaCow.MODID + "." + registryName);
 		setRegistryName(registryName);
 		setCreativeTab(mod_LavaCow.TAB_ITEMS);
 		this.itemDuraion = duration;

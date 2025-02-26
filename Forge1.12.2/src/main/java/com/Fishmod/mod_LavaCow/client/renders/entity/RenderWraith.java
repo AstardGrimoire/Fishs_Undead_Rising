@@ -17,7 +17,7 @@ public class RenderWraith extends RenderLiving<EntityWraith>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderWraith(RenderManager rendermanagerIn) {

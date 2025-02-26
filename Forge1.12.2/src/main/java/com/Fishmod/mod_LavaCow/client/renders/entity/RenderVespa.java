@@ -17,7 +17,7 @@ public class RenderVespa extends RenderLiving<EntityVespa>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderVespa(RenderManager rendermanagerIn) {

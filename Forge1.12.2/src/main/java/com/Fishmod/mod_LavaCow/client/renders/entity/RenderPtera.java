@@ -18,7 +18,7 @@ public class RenderPtera extends RenderLiving<EntityPtera>{
 	
 	static{
 		for(ResourceLocation texture: TEXTURES)
-			System.out.println(texture.getResourcePath());
+			System.out.println(texture.getPath());
     }
 
     public RenderPtera(RenderManager rendermanagerIn) {

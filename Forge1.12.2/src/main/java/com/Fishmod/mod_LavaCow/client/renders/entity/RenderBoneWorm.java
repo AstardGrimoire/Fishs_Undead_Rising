@@ -15,7 +15,7 @@ public class RenderBoneWorm extends RenderLiving<EntityBoneWorm> {
 
     static {
         for (ResourceLocation texture : TEXTURES)
-            System.out.println(texture.getResourcePath());
+            System.out.println(texture.getPath());
     }
 
     public RenderBoneWorm(RenderManager rendermanagerIn) {
