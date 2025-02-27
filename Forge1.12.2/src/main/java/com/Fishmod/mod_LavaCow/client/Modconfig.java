@@ -284,6 +284,7 @@ public class Modconfig {
     public static int pSpawnRate_Glowshroom;
     public static int pSpreadRate_Glowshroom;
     public static boolean Piranha_AnimalAttack;
+    public static boolean BeastClaw_Needs_Sneak;
     public static int BoneSword_Damage;
     public static boolean BoneSword_Boss_Damage;
     public static int HaloNecklace_Damage;
@@ -734,6 +735,8 @@ public class Modconfig {
         GoldenHeart_Regeneration_Amount = config.get(Configuration.CATEGORY_GENERAL, "golden heart regeneration amount", 8, "Amount of seconds of Regeneration applied by the Golden Heart, 0 = Infinite [0-10000]", 0, 10000).getInt(8);
         GoldenHeart_Repair_Amount = config.get(Configuration.CATEGORY_GENERAL, "golden heart repair amount", 1, "Amount of durability repaired per second by the Golden Heart. [0-10000]", 0, 10000).getInt(1);
         GoldenHeart_RepairsEquipment = config.get(Configuration.CATEGORY_GENERAL, "golden heart repairs equipment", true, "Allow the Golden Heart to repair worn equipment. [false/true]").getBoolean(true);
+
+        BeastClaw_Needs_Sneak = config.get(Configuration.CATEGORY_GENERAL, "beast claw needs sneak", false, "Does Beast Claw right click ability require player to be sneaking?. [false/true]").getBoolean(false);
 
         BoneSword_Boss_Damage = config.get(Configuration.CATEGORY_GENERAL, "bone sword boss damage", false, "Allow the Bone Sword to deal extra damage to bosses. [false/true]").getBoolean(false);
         BoneSword_Damage = config.get(Configuration.CATEGORY_GENERAL, "bone sword bonus damage", 5, "Set the bonus damage of Bone Sword to X% [0-100]", 0, 100).getInt(5);
