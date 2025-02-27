@@ -425,7 +425,7 @@ public class ItemFishCustomWeapon extends ItemSword {
             return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
         }
 
-        if (playerIn.getHeldItem(handIn).getItem() == FishItems.BEAST_CLAW && playerIn.onGround) {
+        if (playerIn.getHeldItem(handIn).getItem() == FishItems.BEAST_CLAW && playerIn.onGround && (!(Modconfig.BeastClaw_Needs_Sneak) || playerIn.isSneaking())) {
             Vec3d lookVec = playerIn.getLookVec();
 
             if (playerIn.getHeldItemOffhand().getItem() == FishItems.BEAST_CLAW && playerIn.getHeldItemMainhand().getItem() == FishItems.BEAST_CLAW) {

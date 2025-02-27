@@ -3,6 +3,7 @@ package com.Fishmod.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
 import com.Fishmod.mod_LavaCow.compat.quark.QuarkCompat;
 import com.Fishmod.mod_LavaCow.compat.rlcombat.RLCombatCompat;
+import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.ConstructsArmoryCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompatClient;
@@ -78,6 +79,7 @@ public class mod_LavaCow {
         if(CompatUtilBridge.isConstructsArmoryLoaded()) ConstructsArmoryCompat.init();
         if(CompatUtilBridge.isQuarkLoaded()) QuarkCompat.init();
         if(CompatUtilBridge.isRLCombatLoaded()) MinecraftForge.EVENT_BUS.register(RLCombatCompat.class);
+        if(CompatUtilBridge.isSMELoaded()) SoManyEnchantmentsCompat.init();
 
         PROXY.preInit(event);
 
