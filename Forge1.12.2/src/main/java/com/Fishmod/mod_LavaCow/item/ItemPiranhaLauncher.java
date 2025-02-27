@@ -124,6 +124,13 @@ public class ItemPiranhaLauncher extends ItemBow {
 	
 		         if (!worldIn.isRemote) {
 					 Vec3d lookVec = playerIn.getLookVec();
+
+					 /*
+					  * SME Compat Info
+					  * SME auto does handling on EntityJoinWorldEvent only on instances of EntityArrow
+					  * Therefore apply SME "ArrowProperties" on all the ammos
+					  * Fixes OP Thorn Gun and other launchers get not boosts
+					  */
 					 
 			         int power_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 			         int punch_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
