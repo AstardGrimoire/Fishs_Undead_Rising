@@ -1165,6 +1165,9 @@ public class ModEventHandler {
 
     @SubscribeEvent
     public void onPCritical(CriticalHitEvent event) {
+        //Handle RLCombat separately using Crit event
+        if(CompatUtilBridge.isRLCombatLoaded()) return;
+
         int CriticalBoostlvl = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CRITICAL_BOOST, event.getEntityPlayer().getHeldItemMainhand());
 
         if (CriticalBoostlvl != 0 && event.getDamageModifier() > 1.0F) {
