@@ -128,8 +128,7 @@ public class ItemPiranhaLauncher extends ItemBow {
 					 /*
 					  * SME Compat Info
 					  * SME auto does handling on EntityJoinWorldEvent only on instances of EntityArrow
-					  * Therefore apply SME "ArrowProperties" on all the ammos
-					  * Fixes OP Thorn Gun and other launchers get not boosts
+					  * Compat handling has to be done after this original handling
 					  */
 					 
 			         int power_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
