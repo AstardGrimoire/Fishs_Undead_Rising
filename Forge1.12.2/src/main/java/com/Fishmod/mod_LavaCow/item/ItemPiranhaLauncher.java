@@ -3,6 +3,8 @@ package com.Fishmod.mod_LavaCow.item;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityCactusThorn;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityDeathCoil;
@@ -134,6 +136,13 @@ public class ItemPiranhaLauncher extends ItemBow {
 			         int power_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 			         int punch_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 			         int flame_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack);
+
+					 // SME Lesser and Advanced Power here to simplify things
+					 // Allow "creative" stacking, will truncate
+					 if(CompatUtilBridge.isSMELoaded()) {
+						 power_lvl -= SoManyEnchantmentsCompat.getPowerlessLevel(stack);
+						 power_lvl += 5 * SoManyEnchantmentsCompat.getAdvancedPowerLevel(stack) / 3;
+					 }
 			         
 			         if (this.shot.equals(EntityCactusThorn.class)) {
 				        	EntityCactusThorn abstractarrowentity = new EntityCactusThorn(playerIn.world, playerIn);

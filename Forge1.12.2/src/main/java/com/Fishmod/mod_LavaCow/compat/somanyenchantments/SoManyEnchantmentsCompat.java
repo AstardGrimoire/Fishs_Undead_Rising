@@ -12,8 +12,14 @@ public class SoManyEnchantmentsCompat {
         MinecraftForge.EVENT_BUS.register(new EnchantmentSplitshotHandler());
     }
 
+    public static int getPowerlessLevel(ItemStack itemStack){
+        return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.powerless, itemStack);
+    }
+    public static int getAdvancedPowerLevel(ItemStack itemStack){
+        return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedPower, itemStack);
+    }
+
     public static int getAdvancedMendingLevel(ItemStack itemStack){
-        if(!(EnchantmentRegistry.advancedMending.isEnabled())) return 0;
         return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedMending, itemStack);
     }
     public static int roundAverage(float value) {

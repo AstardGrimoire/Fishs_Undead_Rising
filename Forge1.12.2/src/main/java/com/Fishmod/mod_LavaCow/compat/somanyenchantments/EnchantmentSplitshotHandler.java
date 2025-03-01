@@ -33,8 +33,9 @@ public class EnchantmentSplitshotHandler {
         int powerLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
         int punchLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
         int flameLevel = EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack);
-        int advPowerLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedPower, stack);
-        if(advPowerLevel > 0) player.getCooldownTracker().setCooldown(stack.getItem(), 20 - (advPowerLevel * 2));
+
+        powerLevel -= SoManyEnchantmentsCompat.getPowerlessLevel(stack);
+        powerLevel += 5 * SoManyEnchantmentsCompat.getAdvancedPowerLevel(stack) / 3;
 
         int level = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.splitShot, stack);
         if (level > 0) {

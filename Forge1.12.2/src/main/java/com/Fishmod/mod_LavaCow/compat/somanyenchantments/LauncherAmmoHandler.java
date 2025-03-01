@@ -35,9 +35,7 @@ public class LauncherAmmoHandler {
     // EntityPiranhaLauncher extends EntityEnchantableFireBall extends EntityFireball
     // EntityEnchantableFireBall extends EntityFireball
     // Safe to assume EntityCactusThorn, EntityDeathCoil, and EntityEnchantableFireBall are only ever Fish Mod
-
-    // Arrow -> Thorn 1/5
-    // 1.25 + 0.75lvl -> (5/2)(3/5) (3/2)(1/5) -> 3/2  3/10
+    // Power tiers handled in ItemPiranhaLauncher to be the least headache
 
     private static final ResourceLocation ARROWPROPERTIES_CAP_RESOURCE = new ResourceLocation(SoManyEnchantments.MODID + ":arrow_capabilities");
 
@@ -176,8 +174,6 @@ public class LauncherAmmoHandler {
     }
 
     // This is ridiculous
-    // Arrow -> Thorn 1/5
-    // Other -> 2.5x Flat + 1.5xlvl
     public static void setArrowEnchantmentsFromStack(ItemStack bow, Entity arrow, IArrowProperties properties) {
         boolean isDeathCoil = arrow instanceof EntityDeathCoil;
         boolean ispiranha = arrow instanceof EntityPiranhaLauncher;
@@ -189,30 +185,20 @@ public class LauncherAmmoHandler {
         if(EnchantmentRegistry.powerless.isEnabled()) {
             int powerlessLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.powerless, bow);
             if(powerlessLevel > 0) {
-                if(isDeathCoil) ((EntityDeathCoil)arrow).setDamage((int)(((EntityDeathCoil)arrow).getDamage() / (1.25D + (double)powerlessLevel * 0.25D)));
-                else if(ispiranha) ((EntityPiranhaLauncher)arrow).setDamage((int)(((EntityPiranhaLauncher)arrow).getDamage() / (1.25D + (double)powerlessLevel * 0.25D)));
-                else if(isFireBall) ((EntityEnchantableFireBall)arrow).setDamage((int)(((EntityEnchantableFireBall)arrow).getDamage() / (1.25D + (double)powerlessLevel * 0.25D)));
-                else {
-                    ((EntityCactusThorn)arrow).setDamage(((EntityCactusThorn)arrow).getDamage() - (0.1D - (double)powerlessLevel * 0.1D));
+                if(isCactusThorn)
                     if (powerlessLevel > 2 || RANDOM.nextFloat() < powerlessLevel * 0.4F) {
-                        ((EntityCactusThorn)arrow).setIsCritical(false);
+                        ((EntityCactusThorn) arrow).setIsCritical(false);
                     }
-                }
             }
         }
 
         if(EnchantmentRegistry.advancedPower.isEnabled()) {
             int advPowerLevel = EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedPower, bow);
             if(advPowerLevel > 0) {
-                if(isDeathCoil) ((EntityDeathCoil)arrow).setDamage((int)(((EntityDeathCoil)arrow).getDamage() * (1.875D + (double)advPowerLevel * 0.225D)));
-                else if(ispiranha) ((EntityPiranhaLauncher)arrow).setDamage((int)(((EntityPiranhaLauncher)arrow).getDamage() * (1.875D + (double)advPowerLevel * 0.225D)));
-                else if(isFireBall) ((EntityEnchantableFireBall)arrow).setDamage((int)(((EntityEnchantableFireBall)arrow).getDamage() * (1.875D + (double)advPowerLevel * 0.225D)));
-                else {
-                    ((EntityCactusThorn)arrow).setDamage(((EntityCactusThorn)arrow).getDamage() + (0.05D + (double)advPowerLevel * 0.15D));
-                    if(advPowerLevel >= 4 || RANDOM.nextFloat() < advPowerLevel * 0.25F) {
-                        ((EntityCactusThorn)arrow).setIsCritical(true);
+                if(isCactusThorn)
+                    if (advPowerLevel >= 4 || RANDOM.nextFloat() < advPowerLevel * 0.25F) {
+                        ((EntityCactusThorn) arrow).setIsCritical(true);
                     }
-                }
             }
         }
 
