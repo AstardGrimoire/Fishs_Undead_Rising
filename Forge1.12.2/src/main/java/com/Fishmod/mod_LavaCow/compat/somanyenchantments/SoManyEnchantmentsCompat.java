@@ -13,13 +13,16 @@ public class SoManyEnchantmentsCompat {
     }
 
     public static int getPowerlessLevel(ItemStack itemStack){
+        if(!(EnchantmentRegistry.powerless.isEnabled())) return 0;
         return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.powerless, itemStack);
     }
     public static int getAdvancedPowerLevel(ItemStack itemStack){
+        if(!(EnchantmentRegistry.advancedPower.isEnabled())) return 0;
         return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedPower, itemStack);
     }
 
     public static int getAdvancedMendingLevel(ItemStack itemStack){
+        if(!(EnchantmentRegistry.advancedMending.isEnabled())) return 0;
         return EnchantmentHelper.getEnchantmentLevel(EnchantmentRegistry.advancedMending, itemStack);
     }
     public static int roundAverage(float value) {

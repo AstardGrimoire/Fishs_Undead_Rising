@@ -191,6 +191,8 @@ public class Modconfig {
     public static int SkeletonKing_Ability_Summon_Max;
     public static int SkeletonKing_Minion_Lifespan;
     public static boolean SkeletonKing_Loot_Option;
+    public static boolean SkeletonKing_Biome_Need_All;
+    public static String[] SkeletonKing_Biome_Allowlist;
 
     public static int pSpawnRate_Mummy;
     public static double Mummy_Health;
@@ -550,6 +552,14 @@ public class Modconfig {
         SkeletonKing_Ability_Summon_Max = config.get("Skeleton King", "skeleton king summon max", 24, "Set the max number of Forsaken summoned [0-100]", 0, 100).getInt(24);
         SkeletonKing_Minion_Lifespan = config.get("Skeleton King", "skeleton king minion lifespan", 120, "Summoned Forsaken lifespan [1-10000]", 1, 10000).getInt(120);
         SkeletonKing_Loot_Option = config.get("Skeleton King", "skeleton king loot in chest", true, "Should Skeleton King drop its loot inside a chest [false/true]").getBoolean(true);
+        SkeletonKing_Biome_Need_All = config.get("Skeleton King", "cursed crown need all tags", true, "Should King's Crown require all (or just one) valid biome tag [false/true]").getBoolean(true);
+        SkeletonKing_Biome_Allowlist = config.getStringList("Cursed Crown Biomes List", "Skeleton King",
+                new String[]{
+                        "HOT",
+                        "DRY",
+                        "SANDY"
+                },
+                "Customize the list of Biome tags the King's Crown will check ex. \"DRY\" or \"SANDY\"");
 
         pSpawnRate_Mummy = config.get("Mummy", "mummy spawn rate", 20, "Set the spawn rate of Mummy [0-10000]", 0, 10000).getInt(20);
         Mummy_Health = config.get("Mummy", "mummy health", 24.0D, "Maximum Mummy health [1-1000]", 1, 1000).getDouble(24.0D);
