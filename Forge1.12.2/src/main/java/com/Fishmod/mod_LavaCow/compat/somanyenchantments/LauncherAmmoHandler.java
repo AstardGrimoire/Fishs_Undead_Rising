@@ -1,5 +1,6 @@
 package com.Fishmod.mod_LavaCow.compat.somanyenchantments;
 
+import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityCactusThorn;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityDeathCoil;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityEnchantableFireBall;
@@ -111,6 +112,7 @@ public class LauncherAmmoHandler {
         IArrowProperties properties = arrow.getCapability(ArrowPropertiesProvider.ARROWPROPERTIES_CAP, null);
         if(properties == null) return;
 
+        if(!(Modconfig.SME_Compat_Special)) return;
         if(EnchantmentRegistry.runeArrowPiercing.isEnabled()) {
             int pierceLevel = properties.getArmorPiercingLevel();
             if(pierceLevel > 0) {
@@ -154,6 +156,7 @@ public class LauncherAmmoHandler {
             }
         }
 
+        if(!(Modconfig.SME_Compat_Special)) return;
         if(EnchantmentRegistry.strafe.isEnabled()) {
             if(properties.getArrowResetsIFrames()) {
                 victim.hurtResistantTime = 0;

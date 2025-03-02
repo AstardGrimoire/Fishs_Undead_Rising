@@ -11,6 +11,7 @@ import javax.annotation.Nullable;
 
 import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
 import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
+import com.Fishmod.mod_LavaCow.entities.tameable.*;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.core.SpawnUtil;
@@ -20,11 +21,6 @@ import com.Fishmod.mod_LavaCow.entities.aquatic.EntityPiranha;
 import com.Fishmod.mod_LavaCow.entities.aquatic.EntityZombiePiranha;
 import com.Fishmod.mod_LavaCow.entities.flying.EntityFlyingMob;
 import com.Fishmod.mod_LavaCow.entities.flying.EntityVespa;
-import com.Fishmod.mod_LavaCow.entities.tameable.EntityLilSludge;
-import com.Fishmod.mod_LavaCow.entities.tameable.EntityMimic;
-import com.Fishmod.mod_LavaCow.entities.tameable.EntityRaven;
-import com.Fishmod.mod_LavaCow.entities.tameable.EntitySummonedZombie;
-import com.Fishmod.mod_LavaCow.entities.tameable.EntityUnburied;
 import com.Fishmod.mod_LavaCow.init.FishItems;
 import com.Fishmod.mod_LavaCow.init.ModEnchantments;
 import com.Fishmod.mod_LavaCow.init.ModMobEffects;
@@ -150,7 +146,7 @@ public class ModEventHandler {
             float var4, var5;
             EntityParasite passenger = EntityParasite.gotParasite(entity.getPassengers());
             if (event.getEntityLiving().isPotionActive(ModMobEffects.INFESTED))
-                var6 = event.getEntityLiving().getActivePotionEffect(ModMobEffects.INFESTED).getAmplifier();
+                var6 = Math.min(Modconfig.Parasite_InfestedAmpSpawns, event.getEntityLiving().getActivePotionEffect(ModMobEffects.INFESTED).getAmplifier());
 
             for (int var3 = 0; var3 < var2 + ((var6 - 1) * (1 + new Random().nextInt(3))); ++var3) {
                 var4 = ((float) (var3 % 2) - 0.5F) / 4.0F;
@@ -578,13 +574,22 @@ public class ModEventHandler {
                 Owner.heal(event.getAmount() * ((EntityLilSludge) event.getSource().getTrueSource()).getLifestealLevel() * 0.05f);
         }
 
-        if (event.getSource().getTrueSource() instanceof EntityUnburied) {
-            EntityLivingBase Owner = ((EntityUnburied) event.getSource().getTrueSource()).getOwner();
+        if (event.getSource().getTrueSource() instanceof EntitySummonedZombie) {
+            EntityLivingBase Owner = ((EntitySummonedZombie) event.getSource().getTrueSource()).getOwner();
 
-            event.setAmount(event.getAmount() + ((EntityUnburied) event.getSource().getTrueSource()).getBonusDamage(event.getEntityLiving()));
+            event.setAmount(event.getAmount() + ((EntitySummonedZombie) event.getSource().getTrueSource()).getBonusDamage(event.getEntityLiving()));
 
             if (Owner != null)
-                Owner.heal(event.getAmount() * ((EntityUnburied) event.getSource().getTrueSource()).getLifestealLevel() * 0.05f);
+                Owner.heal(event.getAmount() * ((EntitySummonedZombie) event.getSource().getTrueSource()).getLifestealLevel() * 0.05f);
+        }
+
+        if (event.getSource().getTrueSource() instanceof EntityScarab) {
+            EntityLivingBase Owner = ((EntityScarab) event.getSource().getTrueSource()).getOwner();
+
+            event.setAmount(event.getAmount() + ((EntityScarab) event.getSource().getTrueSource()).getBonusDamage(event.getEntityLiving()));
+
+            if (Owner != null)
+                Owner.heal(event.getAmount() * ((EntityScarab) event.getSource().getTrueSource()).getLifestealLevel() * 0.05f);
         }
 
         if (event.getEntityLiving().isBurning() && event.getSource().getTrueSource() instanceof EntityPlayer) {
@@ -708,27 +713,28 @@ public class ModEventHandler {
         DamageSource source = event.getSource();
         EntityLivingBase Attacked = event.getEntityLiving();
         Entity Attacker = source.getTrueSource();
+        if (Attacker == null) return;
         int Armor_Famine_lvl = 0;
 
-        if (Attacker != null) {
-            for (ItemStack S : Attacker.getArmorInventoryList()) {
-                if (S.getItem() instanceof ItemFamineArmor) {
-                    Armor_Famine_lvl++;
-                }
+        for (ItemStack S : Attacker.getArmorInventoryList()) {
+            if (S.getItem() instanceof ItemFamineArmor) {
+                Armor_Famine_lvl++;
             }
         }
 
-        if (Attacker != null && Armor_Famine_lvl >= 4 && Attacker instanceof EntityLivingBase) {
+        if (Armor_Famine_lvl >= 4 && Attacker instanceof EntityLivingBase) {
             event.setAmount(event.getAmount() + 2.0F);
         }
 
-        if (Attacker != null && Attacker instanceof EntityLilSludge) {
+        if (Attacker instanceof EntityLilSludge) {
             event.setAmount(event.getAmount() + ((EntityLilSludge) Attacker).getBonusDamage(Attacked));
-        } else if (Attacker != null && Attacker instanceof EntityUnburied) {
-            event.setAmount(event.getAmount() + ((EntityUnburied) Attacker).getBonusDamage(Attacked));
+        } else if (Attacker instanceof EntitySummonedZombie) {
+            event.setAmount(event.getAmount() + ((EntitySummonedZombie) Attacker).getBonusDamage(Attacked));
+        } else if (Attacker instanceof EntityScarab) {
+            event.setAmount(event.getAmount() + ((EntityScarab) Attacker).getBonusDamage(Attacked));
         }
 
-        if (Attacker != null && Attacker instanceof EntityLivingBase) {
+        if (Attacker instanceof EntityLivingBase) {
             Item heldItem = ((EntityLivingBase) Attacker).getHeldItemMainhand().getItem();
             if (heldItem.equals(FishItems.BONESWORD)) {
                 if (!event.getEntityLiving().isNonBoss() && !Modconfig.BoneSword_Boss_Damage) return;

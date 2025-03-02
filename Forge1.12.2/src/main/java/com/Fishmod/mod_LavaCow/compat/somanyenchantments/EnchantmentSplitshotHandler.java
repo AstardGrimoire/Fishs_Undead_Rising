@@ -1,12 +1,12 @@
 package com.Fishmod.mod_LavaCow.compat.somanyenchantments;
 
+import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.entities.projectiles.*;
 import com.Fishmod.mod_LavaCow.init.FishItems;
 import com.Fishmod.mod_LavaCow.item.ItemPiranhaLauncher;
 import com.shultrea.rin.mixin.vanilla.IItemBowMixin;
 import com.shultrea.rin.registry.EnchantmentRegistry;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.EntityList;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Enchantments;
@@ -19,6 +19,7 @@ public class EnchantmentSplitshotHandler {
 
     @SubscribeEvent
     public void onLauncherStart(PlayerInteractEvent.RightClickItem event){
+        if(!(Modconfig.SME_Compat_Special)) return;
         if(event.getWorld().isRemote) return;
         EntityPlayer player = event.getEntityPlayer();
         if(event.getEntityPlayer() == null) return;
@@ -69,8 +70,9 @@ public class EnchantmentSplitshotHandler {
 
                     // EntityDeathCoil
                     if (stack.getItem() == FishItems.FORSAKEN_STAFF) {
-                        EntityDeathCoil deathCoil = (EntityDeathCoil) EntityList.newEntity(EntityDeathCoil.class, player.world);
-                        if (deathCoil == null) return;
+                        EntityDeathCoil deathCoil = new EntityDeathCoil(player.world, player, 0D, 0D, 0D);
+                        deathCoil.accelerationX = deathCoil.accelerationY = deathCoil.accelerationZ = 0;
+
                         deathCoil.shootingEntity = player;
                         deathCoil.addVelocity(xMod, yMod, zMod);
                         deathCoil.setPosition(player.posX + vector.x, player.posY + (double) (player.height), player.posZ + vector.z);
@@ -86,13 +88,14 @@ public class EnchantmentSplitshotHandler {
                         EntityEnchantableFireBall enchantableFireBall;
                         double ammoMod = 2.5D;
                         if(stack.getItem() == FishItems.PIRANHALAUNCHER){
-                            enchantableFireBall = (EntityEnchantableFireBall) EntityList.newEntity(EntityPiranhaLauncher.class, player.world);
+                            enchantableFireBall = new EntityPiranhaLauncher(player.world, player, 0D, 0D, 0D);
+                            enchantableFireBall.accelerationX = enchantableFireBall.accelerationY = enchantableFireBall.accelerationZ = 0;
                             ammoMod = 2.0D;
                         }
                         else{
-                            enchantableFireBall = (EntityEnchantableFireBall) EntityList.newEntity(EntityWarSmallFireball.class, player.world);
+                            enchantableFireBall = new EntityWarSmallFireball(player.world, player, 0D, 0D, 0D);
+                            enchantableFireBall.accelerationX = enchantableFireBall.accelerationY = enchantableFireBall.accelerationZ = 0;
                         }
-                        if (enchantableFireBall == null) return;
                         enchantableFireBall.shootingEntity = player;
                         enchantableFireBall.addVelocity(xMod * ammoMod, yMod * ammoMod, zMod * ammoMod);
                         enchantableFireBall.setPosition(player.posX + vector.x, player.posY + (double) (player.height), player.posZ + vector.z);

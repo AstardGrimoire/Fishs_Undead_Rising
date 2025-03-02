@@ -43,6 +43,7 @@ public class Modconfig {
     public static String[] Parasite_Hostlist = new String[0];
     public static int Parasite_Lifespan;
     public static boolean Parasite_Pickup;
+    public static int Parasite_InfestedAmpSpawns;
 
     public static int pSpawnRate_UndeadSwine;
     public static double UndeadSwine_Health;
@@ -304,6 +305,7 @@ public class Modconfig {
     public static boolean Quark_Compat;
     public static boolean RLCombat_Compat;
     public static boolean SME_Compat;
+    public static boolean SME_Compat_Special;
     public static boolean SunScreen_Mode;
     public static int SpawnRate_Cemetery;
     public static int BoneSword_DamageCap;
@@ -333,7 +335,7 @@ public class Modconfig {
     public static int pSpawnRate_Veilshroom;
     public static boolean MonsterSpawner_Mobs;
 
-    public final String[] usedCategories = {Configuration.CATEGORY_GENERAL, "Amber Lord", "Amber Scarab", "Avaton", "Banshee", "Cactoid", "Cactyrant", "Enigmoth", "Enigmoth Caterpillar", "Foglet", "Slothoman",
+    public final String[] usedCategories = {Configuration.CATEGORY_GENERAL, "Mod Integration", "Mod Integration Toggles", "Amber Lord", "Amber Scarab", "Avaton", "Banshee", "Cactoid", "Cactyrant", "Enigmoth", "Enigmoth Caterpillar", "Foglet", "Slothoman",
             "Imp", "Forsaken", "Frigid", "Ghost Ray", "Ghost Swarmer", "Ithaqua", "Lil' Sludge", "Mimicrab", "Moogma", "Mummy", "Mycosis", "Osvermis", "Parasite", "Penghoul", "Piranha", "Ptera", "Raven", "Warmander",
             "Scarecrow", "Skeleton King", "Sludge Lord", "Swarmer", "Unburied", "Undead Swine", "Undertaker", "Vespa", "Weta", "Sea Hag", "Grave Robber", "Ghost of Grave Robber", "Revenant", "Shroom"};
 
@@ -344,6 +346,7 @@ public class Modconfig {
 
         config.load();
         syncConfigs();
+        config.setCategoryRequiresMcRestart("Mod Integration", true);
     }
 
     private void syncConfigs() {
@@ -379,6 +382,7 @@ public class Modconfig {
         Parasite_Attach = config.get("Parasite", "parasite attacks by attaching onto target", true, "Parasite will attack their target by attaching on them [false/true]").getBoolean(true);
         Parasite_Lifespan = config.get("Parasite", "parasite lifespan", 16, "The amount of seconds before Parasites naturally die or form into cocoons").getInt(16);
         Parasite_Pickup = config.get("Parasite", "parasite pickup", true, "You can pick up Parasites by right clicking them with an empty main hand while sneaking [false/true]").getBoolean(true);
+        Parasite_InfestedAmpSpawns = config.get("Parasite", "parasite infested amplifier spawns", 4, "The maximum amplifier of the Infested potion effect that scales additional parasite spawns").getInt(4);
         Parasite_Hosts = config.get("Parasite", "parasite hosts", true, "Should Parasites have a chance to pop out from dying mobs in the host list or mobs under the Infested effect [false/true]").getBoolean(true);
         Parasite_Hostlist = config.getStringList("Available hosts for parasite", "Parasite",
                 new String[]{
@@ -801,11 +805,16 @@ public class Modconfig {
         ScarabWand_Cooldown = config.get(Configuration.CATEGORY_GENERAL, "scarab scepter cooldown", 60, "Ability cooldown of Scarab Scepter [1-10000]", 1, 10000).getInt(60);
         Undertaker_Shovel_Cooldown = config.get(Configuration.CATEGORY_GENERAL, "midnight mourne cooldown", 60, "Ability cooldown of Midnight Mourne [1-10000]", 1, 10000).getInt(60);
 
-        Tinkers_Compat = config.get(Configuration.CATEGORY_GENERAL, "tinkers' construct integration", true, "Should new tool materials be added to Tinkers' Construct when installed? [false/true]").getBoolean(true);
-        Tinkers_Armor_Compat = config.get(Configuration.CATEGORY_GENERAL, "construct's armory integration", true, "Should new armor materials be added to Construct's Armory when installed? (requires Tinkers' Construct) [false/true]").getBoolean(true);
-        Quark_Compat = config.get(Configuration.CATEGORY_GENERAL, "quark integration", true, "Should new features be added when Quark is also installed? [false/true]").getBoolean(true);
-        RLCombat_Compat = config.get(Configuration.CATEGORY_GENERAL, "rlcombat integration", true, "Should Azrael's Scythe use RLCombat for handling? [false/true]").getBoolean(true);
-        SME_Compat = config.get(Configuration.CATEGORY_GENERAL, "somanyenchantments integration", true, "Should So Many Enchantment's Lesser, Advanced, and Supreme Enchants be considered? [false/true]").getBoolean(true);
+        // Restart Required, loaded during init
+        Tinkers_Compat = config.get("Mod Integration", "tinkers' construct integration", true, "Should new tool materials be added to Tinkers' Construct when installed? [false/true]").getBoolean(true);
+        Tinkers_Armor_Compat = config.get("Mod Integration", "construct's armory integration", true, "Should new armor materials be added to Construct's Armory when installed? (requires Tinkers' Construct) [false/true]").getBoolean(true);
+        Quark_Compat = config.get("Mod Integration", "quark integration", true, "Should new features be added when Quark is also installed? [false/true]").getBoolean(true);
+        RLCombat_Compat = config.get("Mod Integration", "rlcombat integration", true, "Should Azrael's Scythe and Critical Boost use RLCombat for handling offhand bonuses? [false/true]").getBoolean(true);
+        SME_Compat = config.get("Mod Integration", "somanyenchantments integration", true, "Should So Many Enchantment's Lesser, Advanced, and Supreme Enchants be considered? [false/true]").getBoolean(true);
+
+        // Mod Compat that doesn't need restart
+        SME_Compat_Special = config.get("Mod Integration Toggles", "somanyenchantments integration", true, "Should So Many Enchantment's unique enchants work on Fish's Undead Rising item abilities? [false/true]").getBoolean(true);
+
         SunScreen_Mode = config.get(Configuration.CATEGORY_GENERAL, "sunscreen mode", false, "Mobs in this mod will not burn under daylight. [false/true]").getBoolean(false);
 
         SpawnRate_Cemetery = config.get(Configuration.CATEGORY_GENERAL, "cemetery spawn rate", 500, "Spawn rate of Cemetery (higher number = less frequent) [1-10000]", 1, 10000).getInt(500);

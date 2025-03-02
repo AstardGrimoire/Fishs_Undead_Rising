@@ -220,8 +220,10 @@ public class EntitySkeletonKing extends EntityMob implements IAggressive {
             for (EntityLivingBase entitylivingbase : this.world.getEntitiesWithinAABB(EntityLivingBase.class, new AxisAlignedBB(d0, d1, d2, d0, d1, d2).grow(1.5D))) {
                 if (!this.isEntityEqual(entitylivingbase) && !this.isOnSameTeam(entitylivingbase)) {
                     entitylivingbase.attackEntityFrom(DamageSource.causeMobDamage(this), (float) this.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue());
-                    entitylivingbase.addPotionEffect(new PotionEffect(ModMobEffects.FRAGILE_KING, 20 * 20, 3));
-                    entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.WITHER, 15 * 20, 2));
+                    if(!(this.world.isRemote)) {
+                        entitylivingbase.addPotionEffect(new PotionEffect(ModMobEffects.FRAGILE_KING, 20 * 20, 3));
+                        entitylivingbase.addPotionEffect(new PotionEffect(MobEffects.WITHER, 15 * 20, 2));
+                    }
                     if (entitylivingbase instanceof EntityPlayer) ((EntityPlayer) entitylivingbase).disableShield(true);
 
                     if (this.isAngered()) {

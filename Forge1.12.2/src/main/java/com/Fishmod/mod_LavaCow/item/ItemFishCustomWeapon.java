@@ -6,7 +6,7 @@ import java.util.Set;
 import javax.annotation.Nullable;
 
 import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
-import com.Fishmod.mod_LavaCow.compat.rlcombat.RLCombatCompat;
+import com.Fishmod.mod_LavaCow.entities.tameable.EntitySummonedZombie;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.entities.EntityMummy;
@@ -281,6 +281,7 @@ public class ItemFishCustomWeapon extends ItemSword {
                 nbttagcompound.setInteger("corrosive", corrosive);
                 entity.readEntityFromNBT(nbttagcompound);
                 entity.setLimitedLife(Modconfig.LilSludge_Lifespan * 20);
+                entity.setHealth(entity.getMaxHealth());
                 entity.setSkin((fire_aspect > 0) ? 1 : 0);
 
                 if (playerIn.world instanceof World) {
@@ -327,6 +328,7 @@ public class ItemFishCustomWeapon extends ItemSword {
                 nbttagcompound.setInteger("corrosive", corrosive);
                 entity.readEntityFromNBT(nbttagcompound);
                 entity.setLimitedLife(Modconfig.Amber_Scarab_Lifespan * 20);
+                entity.setHealth(entity.getMaxHealth());
 
                 if (playerIn.world instanceof World) {
                     for (int j = 0; j < 24; ++j) {
@@ -445,109 +447,14 @@ public class ItemFishCustomWeapon extends ItemSword {
             for (int i = 0; i < 4; ++i) {
                 NBTTagCompound nbttagcompound = new NBTTagCompound();
                 BlockPos blockpos = (new BlockPos(playerIn)).add(-4 + Item.itemRand.nextInt(8), 0, -4 + Item.itemRand.nextInt(8));
-                if (worldIn.rand.nextFloat() < 0.15F) {
-                    if (BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.DRY)) {
-                        EntityMummy entity = new EntityMummy(worldIn);
-                        entity.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-                        entity.onInitialSpawn(worldIn.getDifficultyForLocation(blockpos), (IEntityLivingData) null);
-                        entity.setOwnerId(playerIn.getUniqueID());
-                        entity.setCanPickUpLoot(false);
-                        entity.setTamed(true);
-                        nbttagcompound.setInteger("fire_aspect", fire_aspect);
-                        nbttagcompound.setInteger("sharpness", sharpness);
-                        nbttagcompound.setInteger("knockback", knockback);
-                        nbttagcompound.setInteger("bane_of_arthropods", bane_of_arthropods);
-                        nbttagcompound.setInteger("smite", smite);
-                        nbttagcompound.setInteger("unbreaking", unbreaking);
-                        nbttagcompound.setInteger("lifesteal", lifesteal);
-                        nbttagcompound.setInteger("poisonous", poisonous);
-                        nbttagcompound.setInteger("corrosive", corrosive);
-                        entity.readEntityFromNBT(nbttagcompound);
-                        entity.setLimitedLife(Modconfig.Unburied_Lifespan * 20);
-
-                        if (playerIn.world instanceof World) {
-                            for (int j = 0; j < 24; ++j) {
-                                double d0 = entity.posX + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                double d1 = entity.posY + (double) (entity.world.rand.nextFloat() * entity.height);
-                                double d2 = entity.posZ + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                mod_LavaCow.NETWORK_WRAPPER.sendToAll(new PacketParticle(fire_aspect > 0 ? EnumParticleTypes.FLAME : EnumParticleTypes.SMOKE_LARGE, d0, d1, d2));
-                            }
-                        }
-
-                        if (!worldIn.isRemote) {
-                            worldIn.spawnEntity(entity);
-                        }
-
-                        worldIn.setEntityState(entity, (byte) 32);
-                    } else if (BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.COLD)) {
-                        EntityZombieFrozen entity = new EntityZombieFrozen(worldIn);
-                        entity.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-                        entity.onInitialSpawn(worldIn.getDifficultyForLocation(blockpos), (IEntityLivingData) null);
-                        entity.setOwnerId(playerIn.getUniqueID());
-                        entity.setCanPickUpLoot(false);
-                        entity.setTamed(true);
-                        nbttagcompound.setInteger("fire_aspect", fire_aspect);
-                        nbttagcompound.setInteger("sharpness", sharpness);
-                        nbttagcompound.setInteger("knockback", knockback);
-                        nbttagcompound.setInteger("bane_of_arthropods", bane_of_arthropods);
-                        nbttagcompound.setInteger("smite", smite);
-                        nbttagcompound.setInteger("unbreaking", unbreaking);
-                        nbttagcompound.setInteger("lifesteal", lifesteal);
-                        nbttagcompound.setInteger("poisonous", poisonous);
-                        nbttagcompound.setInteger("corrosive", corrosive);
-                        entity.readEntityFromNBT(nbttagcompound);
-                        entity.setLimitedLife(Modconfig.Unburied_Lifespan * 20);
-
-                        if (playerIn.world instanceof World) {
-                            for (int j = 0; j < 24; ++j) {
-                                double d0 = entity.posX + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                double d1 = entity.posY + (double) (entity.world.rand.nextFloat() * entity.height);
-                                double d2 = entity.posZ + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                mod_LavaCow.NETWORK_WRAPPER.sendToAll(new PacketParticle(fire_aspect > 0 ? EnumParticleTypes.FLAME : EnumParticleTypes.SMOKE_LARGE, d0, d1, d2));
-                            }
-                        }
-
-                        if (!worldIn.isRemote) {
-                            worldIn.spawnEntity(entity);
-                        }
-
-                        worldIn.setEntityState(entity, (byte) 32);
-                    } else if (BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.WET)) {
-                        EntityZombieMushroom entity = new EntityZombieMushroom(worldIn);
-                        entity.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
-                        entity.onInitialSpawn(worldIn.getDifficultyForLocation(blockpos), (IEntityLivingData) null);
-                        entity.setOwnerId(playerIn.getUniqueID());
-                        entity.setCanPickUpLoot(false);
-                        entity.setTamed(true);
-                        nbttagcompound.setInteger("fire_aspect", fire_aspect);
-                        nbttagcompound.setInteger("sharpness", sharpness);
-                        nbttagcompound.setInteger("knockback", knockback);
-                        nbttagcompound.setInteger("bane_of_arthropods", bane_of_arthropods);
-                        nbttagcompound.setInteger("smite", smite);
-                        nbttagcompound.setInteger("unbreaking", unbreaking);
-                        nbttagcompound.setInteger("lifesteal", lifesteal);
-                        nbttagcompound.setInteger("poisonous", poisonous);
-                        nbttagcompound.setInteger("corrosive", corrosive);
-                        entity.readEntityFromNBT(nbttagcompound);
-                        entity.setLimitedLife(Modconfig.Unburied_Lifespan * 20);
-
-                        if (playerIn.world instanceof World) {
-                            for (int j = 0; j < 24; ++j) {
-                                double d0 = entity.posX + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                double d1 = entity.posY + (double) (entity.world.rand.nextFloat() * entity.height);
-                                double d2 = entity.posZ + (double) (entity.world.rand.nextFloat() * entity.width * 2.0F) - (double) entity.width;
-                                mod_LavaCow.NETWORK_WRAPPER.sendToAll(new PacketParticle(fire_aspect > 0 ? EnumParticleTypes.FLAME : EnumParticleTypes.SMOKE_LARGE, d0, d1, d2));
-                            }
-                        }
-
-                        if (!worldIn.isRemote) {
-                            worldIn.spawnEntity(entity);
-                        }
-
-                        worldIn.setEntityState(entity, (byte) 32);
-                    }
-                } else {
-                    EntityUnburied entity = new EntityUnburied(worldIn);
+                if ((i==0) || worldIn.rand.nextFloat() < 0.15F) {
+                    EntitySummonedZombie entity = new EntityUnburied(worldIn);
+                    if(BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.DRY))
+                        entity = new EntityMummy(worldIn);
+                    else if(BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.COLD))
+                        entity = new EntityZombieFrozen(worldIn);
+                    else if(BiomeDictionary.hasType(playerIn.getEntityWorld().getBiome(playerIn.getPosition()), Type.WET))
+                        entity = new EntityZombieMushroom(worldIn);
                     entity.moveToBlockPosAndAngles(blockpos, 0.0F, 0.0F);
                     entity.onInitialSpawn(worldIn.getDifficultyForLocation(blockpos), (IEntityLivingData) null);
                     entity.setOwnerId(playerIn.getUniqueID());
@@ -564,6 +471,7 @@ public class ItemFishCustomWeapon extends ItemSword {
                     nbttagcompound.setInteger("corrosive", corrosive);
                     entity.readEntityFromNBT(nbttagcompound);
                     entity.setLimitedLife(Modconfig.Unburied_Lifespan * 20);
+                    entity.setHealth(entity.getMaxHealth());
 
                     if (playerIn.world instanceof World) {
                         for (int j = 0; j < 24; ++j) {
