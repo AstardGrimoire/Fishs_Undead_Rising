@@ -494,8 +494,8 @@ public class ModEventHandler {
 
     @SubscribeEvent
     public static void onBlockDestroyed(HarvestDropsEvent event) {
-        if (event.getHarvester() != null && event.getState().getBlock().canHarvestBlock(event.getWorld(), event.getPos(), event.getHarvester())) {
-            if (event.getHarvester().getHeldItemMainhand().getItem() == FishItems.MOLTENAXE || event.getHarvester().getHeldItemMainhand().getItem() == FishItems.SOULFORGED_AXE) {
+        if (event.getHarvester() != null && (event.getHarvester().getHeldItemMainhand().getItem() == FishItems.MOLTENAXE || event.getHarvester().getHeldItemMainhand().getItem() == FishItems.SOULFORGED_AXE)) {
+            if (event.getState().getBlock().canHarvestBlock(event.getWorld(), event.getPos(), event.getHarvester())) {
                 List<ItemStack> to_be_removed = new ArrayList<ItemStack>();
                 List<ItemStack> to_be_added = new ArrayList<ItemStack>();
 
