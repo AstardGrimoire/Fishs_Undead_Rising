@@ -1,17 +1,35 @@
 package com.Fishmod.mod_LavaCow.compat.rlcombat;
 
+import bettercombat.mod.event.RLCombatCriticalHitEvent;
 import bettercombat.mod.event.RLCombatSweepEvent;
 import com.Fishmod.mod_LavaCow.init.FishItems;
+import com.Fishmod.mod_LavaCow.init.ModEnchantments;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 
 public class RLCombatCompat {
 
     /*
-    *   Fixes
-    *   - Offhand Attack getting incorrect sweep modifier
-    *
+     *   - Allow offhand crit to get correct modifier
+     *   - If compat is loaded, cancel original handling
+     */
+    @SubscribeEvent
+    public static void doCritBoost(RLCombatCriticalHitEvent event){
+        EntityLivingBase attacker = event.getEntityPlayer();
+        ItemStack stack = event.getOffhand() ? attacker.getHeldItemOffhand() : attacker.getHeldItemMainhand();
+        if(stack.isEmpty()) return;
+
+        int level = EnchantmentHelper.getEnchantmentLevel(ModEnchantments.CRITICAL_BOOST, stack);
+        if (level > 0) { event.setDamageModifier(event.getDamageModifier() + (level * 0.15F)); }
+    }
+
+    /*
+    *   - Allow offhand sweep to get correct modifier
+    *   - If compat is loaded, cancel original handling
      */
     @SubscribeEvent
     public static void onScytheSweep(RLCombatSweepEvent event) {

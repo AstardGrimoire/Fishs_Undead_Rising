@@ -42,8 +42,8 @@ public class ItemSoulforgedAxe extends ItemAxe {
 		super.hitEntity(stack, target, attacker);
 		
 		// Stacks with Fire Aspect
-		target.setFire(10 + 5 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
-		target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())), 2));
+		target.setFire(10 + 5 * EnchantmentHelper.getFireAspectModifier(attacker));
+		target.addPotionEffect(new PotionEffect(MobEffects.WITHER, 200 + 100 * EnchantmentHelper.getFireAspectModifier(attacker), 2));
         return true;
     }
 	

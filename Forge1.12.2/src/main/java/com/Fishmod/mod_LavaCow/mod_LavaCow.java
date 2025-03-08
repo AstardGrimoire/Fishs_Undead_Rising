@@ -3,9 +3,12 @@ package com.Fishmod.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
 import com.Fishmod.mod_LavaCow.compat.quark.QuarkCompat;
 import com.Fishmod.mod_LavaCow.compat.rlcombat.RLCombatCompat;
+import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.ConstructsArmoryCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompat;
 import com.Fishmod.mod_LavaCow.compat.tinkers.TinkersCompatClient;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.Fishmod.mod_LavaCow.client.Modconfig;
@@ -55,7 +58,7 @@ public class mod_LavaCow {
     @Instance(mod_LavaCow.MODID)
     public static mod_LavaCow INSTANCE;
 
-    public static Logger logger;
+    public static Logger logger = LogManager.getLogger(); // Swapped from setting to event.getModLog(); in preinit
 
     public static SimpleNetworkWrapper NETWORK_WRAPPER;
 
@@ -63,7 +66,6 @@ public class mod_LavaCow {
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        logger = event.getModLog();
         TAB_ITEMS = new CreativeTab(MODID + "_items");
         Modconfig.INSTANCE.loadConfig(event);
         MinecraftForge.EVENT_BUS.register(new RegistryHandler());
@@ -78,6 +80,7 @@ public class mod_LavaCow {
         if(CompatUtilBridge.isConstructsArmoryLoaded()) ConstructsArmoryCompat.init();
         if(CompatUtilBridge.isQuarkLoaded()) QuarkCompat.init();
         if(CompatUtilBridge.isRLCombatLoaded()) MinecraftForge.EVENT_BUS.register(RLCombatCompat.class);
+        if(CompatUtilBridge.isSMELoaded()) SoManyEnchantmentsCompat.init();
 
         PROXY.preInit(event);
 

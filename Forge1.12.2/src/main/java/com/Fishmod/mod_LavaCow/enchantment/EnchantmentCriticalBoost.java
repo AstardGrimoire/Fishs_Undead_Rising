@@ -65,11 +65,6 @@ public class EnchantmentCriticalBoost extends Enchantment {
     }
 	
 	@Override
-	public void onEntityDamaged(EntityLivingBase user, Entity target, int level) {
-		user.heal((float)user.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).getAttributeValue() * (float)level * 0.05F);
-	}
-	
-	@Override
 	public boolean canApplyTogether(Enchantment enchant) {
 		return !(enchant instanceof EnchantmentDamage);
 	}

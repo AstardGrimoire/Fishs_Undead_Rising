@@ -3,6 +3,8 @@ package com.Fishmod.mod_LavaCow.item;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import com.Fishmod.mod_LavaCow.compat.CompatUtilBridge;
+import com.Fishmod.mod_LavaCow.compat.somanyenchantments.SoManyEnchantmentsCompat;
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityCactusThorn;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityDeathCoil;
@@ -124,10 +126,23 @@ public class ItemPiranhaLauncher extends ItemBow {
 	
 		         if (!worldIn.isRemote) {
 					 Vec3d lookVec = playerIn.getLookVec();
+
+					 /*
+					  * SME Compat Info
+					  * SME auto does handling on EntityJoinWorldEvent only on instances of EntityArrow
+					  * Compat handling has to be done after this original handling
+					  */
 					 
 			         int power_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 			         int punch_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
 			         int flame_lvl = EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack);
+
+					 // SME Lesser and Advanced Power here to simplify things
+					 // Allow "creative" stacking, will truncate
+					 if(CompatUtilBridge.isSMELoaded()) {
+						 power_lvl -= SoManyEnchantmentsCompat.getPowerlessLevel(stack);
+						 power_lvl += 5 * SoManyEnchantmentsCompat.getAdvancedPowerLevel(stack) / 3;
+					 }
 			         
 			         if (this.shot.equals(EntityCactusThorn.class)) {
 				        	EntityCactusThorn abstractarrowentity = new EntityCactusThorn(playerIn.world, playerIn);

@@ -40,7 +40,7 @@ public class ItemMoltenAxe extends ItemAxe {
 		super.hitEntity(stack, target, attacker);
 		
 		// Stacks with Fire Aspect
-		target.setFire(8 + 4 * EnchantmentHelper.getEnchantmentLevel(Enchantments.FIRE_ASPECT, attacker.getHeldItem(attacker.getActiveHand())));
+		target.setFire(8 + 4 * EnchantmentHelper.getFireAspectModifier(attacker));
         return true;
     }
 	

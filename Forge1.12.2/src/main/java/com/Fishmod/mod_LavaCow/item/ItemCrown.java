@@ -27,6 +27,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.common.BiomeDictionary.Type;
 import net.minecraftforge.fml.relauncher.Side;
@@ -54,9 +55,7 @@ public class ItemCrown extends ItemFishCustom {
         if(player.getHeldItem(hand).getMetadata() == 1 && Modconfig.pSpawnRate_SkeletonKing
         		&& worldIn.getBlockState(pos).getBlock().equals(Blocks.SKULL)
         		&& !(worldIn.getDifficulty() == EnumDifficulty.PEACEFUL)
-        		&& BiomeDictionary.hasType(worldIn.getBiome(pos), Type.HOT)
-        		&& BiomeDictionary.hasType(worldIn.getBiome(pos), Type.DRY)
-        		&& BiomeDictionary.hasType(worldIn.getBiome(pos), Type.SANDY))
+				&& isValidCrownBiome(worldIn.getBiome(pos)))
         {
         	TileEntity tileentity = worldIn.getTileEntity(pos);
         	
@@ -111,4 +110,19 @@ public class ItemCrown extends ItemFishCustom {
             }
         }
     }
+
+	/*
+	*	Option to modify the biome tag list for custom biomes
+	 */
+	public boolean isValidCrownBiome(Biome biome){
+		for(String tag: Modconfig.SkeletonKing_Biome_Allowlist){
+			if(BiomeDictionary.hasType(biome, Type.getType(tag))){
+				if(!(Modconfig.SkeletonKing_Biome_Need_All)) return true;
+			}
+			else{
+				if(Modconfig.SkeletonKing_Biome_Need_All) return false;
+			}
+		}
+		return Modconfig.SkeletonKing_Biome_Need_All;
+	}
 }
