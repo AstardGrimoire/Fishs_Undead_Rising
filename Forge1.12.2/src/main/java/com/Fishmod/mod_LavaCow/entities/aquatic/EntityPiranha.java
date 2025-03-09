@@ -34,10 +34,8 @@ public class EntityPiranha extends EntityZombiePiranha{
     protected void applyEntityAI() {
     	if(Modconfig.Piranha_AnimalAttack) {
         	this.targetTasks.addTask(3, new EntityAINearestAttackableTarget<EntitySquid>(this, EntitySquid.class, true));
-    		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityAgeable.class, 0, true, true, new Predicate<Entity>()
-            {
-                public boolean apply(@Nullable Entity p_apply_1_)
-                {
+    		this.targetTasks.addTask(4, new EntityAINearestAttackableTarget<>(this, EntityAgeable.class, 0, true, true, new Predicate<Entity>() {
+                public boolean apply(@Nullable Entity p_apply_1_) {
                     return !(p_apply_1_ instanceof EntityTameable) && ((EntityAgeable)p_apply_1_).getHealth() < ((EntityAgeable)p_apply_1_).getMaxHealth();
                 }
             }));
