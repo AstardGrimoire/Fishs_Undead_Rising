@@ -131,16 +131,4 @@ public class ItemGoldenHeart extends ItemRareLoot implements IBauble {
 	        ItemGoldenHeart.onTick(stack, (EntityPlayer) plr);
 	    }
     }
-    
-    @Override
-	@Optional.Method(modid = "baubles")
-	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-		player.playSound(SoundEvents.ENTITY_ENDEREYE_DEATH, 0.75F, 2.0F);
-	}
-
-	@Override
-	@Optional.Method(modid = "baubles")
-	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-		player.playSound(SoundEvents.ENTITY_ENDEREYE_DEATH, 0.75F, 2.0F);
-	}
 }
