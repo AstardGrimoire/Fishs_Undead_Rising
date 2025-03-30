@@ -17,7 +17,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
@@ -131,16 +130,4 @@ public class ItemGoldenHeart extends ItemRareLoot implements IBauble {
 	        ItemGoldenHeart.onTick(stack, (EntityPlayer) plr);
 	    }
     }
-    
-    @Override
-	@Optional.Method(modid = "baubles")
-	public void onEquipped(ItemStack stack, EntityLivingBase player) {
-		player.playSound(SoundEvents.ENTITY_ENDEREYE_DEATH, 0.75F, 2.0F);
-	}
-
-	@Override
-	@Optional.Method(modid = "baubles")
-	public void onUnequipped(ItemStack stack, EntityLivingBase player) {
-		player.playSound(SoundEvents.ENTITY_ENDEREYE_DEATH, 0.75F, 2.0F);
-	}
 }
