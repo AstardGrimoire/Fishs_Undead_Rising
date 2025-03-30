@@ -48,7 +48,6 @@ public class ModelScarecrowHead_common extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
     	GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
-    	GL11.glDisable(GL11.GL_CULL_FACE);
     	this.Head.render(f5);
     }
 
