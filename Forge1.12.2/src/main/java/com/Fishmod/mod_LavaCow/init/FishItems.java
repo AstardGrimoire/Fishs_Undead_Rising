@@ -1,6 +1,7 @@
 package com.Fishmod.mod_LavaCow.init;
 
 import com.Fishmod.mod_LavaCow.mod_LavaCow;
+import com.Fishmod.mod_LavaCow.client.Modconfig;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityCactusThorn;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityDeathCoil;
 import com.Fishmod.mod_LavaCow.entities.projectiles.EntityPiranhaLauncher;
@@ -158,7 +159,6 @@ public class FishItems {
     public static final Item FAMINEARMOR_BOOTS = new ItemFamineArmor("faminearmor_boots", 2, EntityEquipmentSlot.FEET);
     public static final Item FOUL_BRISTLE = new ItemFishCustom("foul_bristle", null, mod_LavaCow.TAB_ITEMS, false);
     public static final Item CRABCAKE = new ItemFishCustomFood("crabcake", 8, 0.9F, true, 24, true).setPotionEffect(new PotionEffect(MobEffects.RESISTANCE, 30 * 20, 0), 1.0F);
-    ;
     public static final Item ECTOPLASM = new ItemFishCustom("ectoplasm", null, mod_LavaCow.TAB_ITEMS, false);
     public static final Item GHOSTJELLY = new ItemNetherStew("ghostjelly", 9, 1.2F);
     public static final Item BANSHEE_VOCAL_CORD = new ItemRareLoot("banshee_vocal_cord", mod_LavaCow.TAB_ITEMS, EnumRarity.RARE, false);
@@ -178,7 +178,7 @@ public class FishItems {
     public static final Item BEAST_CLAW = new ItemFishCustomWeapon("beast_claw", TOOL_FAMINE, 3.0F, -2.0F, FishItems.SCYTHE_CLAW, EnumRarity.EPIC);
     public static final Item CURSEWEAVE_CLOTH = new ItemFishCustom("curseweave_cloth", null, mod_LavaCow.TAB_ITEMS, false);
     public static final Item UNDERTAKER_SHOVEL = new ItemFishCustomWeapon("undertaker_shovel", TOOL_SCEPTER_UNBURIED, 2.0F, -3.0F, FishItems.HATRED_SHARD, EnumRarity.RARE).setMaxDamage(200);
-    public static final Item SKELETONKING_MACE = new ItemFishCustomWeapon("skeletonking_mace", TOOL_SKELETON_KING, 12.0F, -3.2F, FishItems.HATRED_SHARD, EnumRarity.EPIC);
+    public static final Item SKELETONKING_MACE = new ItemFishCustomWeapon("skeletonking_mace", TOOL_SKELETON_KING, (float) Modconfig.Skeleton_King_Mace_Damage - 4.0F, -3.2F, FishItems.HATRED_SHARD, EnumRarity.EPIC);
     public static final Item IMP_HORN = new ItemFishCustom("imp_horn", null, mod_LavaCow.TAB_ITEMS, false);
     public static final Item CHITIN_HELMET = new ItemChitinArmor("chitinarmor_helmet", 2, EntityEquipmentSlot.HEAD);
     public static final Item CHITIN_CHESTPLATE = new ItemChitinArmor("chitinarmor_chestplate", 2, EntityEquipmentSlot.CHEST);
