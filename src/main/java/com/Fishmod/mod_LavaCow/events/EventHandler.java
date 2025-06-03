@@ -929,7 +929,7 @@ public class EventHandler {
             }
         }
         
-        if (event.getDamageSource().getDirectEntity() != null) {
+        if (Attacker != null && event.getDamageSource().getDirectEntity() != null) {
             if (event.getDamageSource().getDirectEntity().getType().equals(FUREntityRegistry.GHOUL_ARROW)) {
                 event.setLootingLevel(event.getLootingLevel() + 3);
             }

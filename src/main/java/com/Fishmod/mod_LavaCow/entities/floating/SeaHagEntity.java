@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 
 import com.Fishmod.mod_LavaCow.config.FURConfig;
 import com.Fishmod.mod_LavaCow.core.SpawnUtil;
-import com.Fishmod.mod_LavaCow.entities.tameable.WetaEntity;
 import com.Fishmod.mod_LavaCow.init.FURSoundRegistry;
 
 import net.minecraft.block.Blocks;
@@ -153,7 +152,7 @@ public class SeaHagEntity extends FloatingMobEntity {
         	if (SeaHagEntity.this.isSpellcasting()) {
                 return false;
             } else {
-                int i = SeaHagEntity.this.level.getEntitiesOfClass(WetaEntity.class, SeaHagEntity.this.getBoundingBox().inflate(16.0D)).size();               
+                int i = SeaHagEntity.this.level.getEntitiesOfClass(PufferfishEntity.class, SeaHagEntity.this.getBoundingBox().inflate(16.0D)).size();               
             	return SeaHagEntity.this.tickCount >= this.spellCooldown && ((SeaHagEntity.this.getTarget() != null && Math.abs(SeaHagEntity.this.getY() - SeaHagEntity.this.getTarget().getY()) < 4.0D)) && i < FURConfig.SeaHag_Ability_Max.get();
             }
         }
