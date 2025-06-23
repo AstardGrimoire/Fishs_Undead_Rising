@@ -16,8 +16,8 @@ public class ModelCrown<T extends LivingEntity> extends BipedModel<T> {
         this.texWidth = 128;
         this.texHeight = 64;
         this.Crown = new ModelRenderer(this, 92, 23);
-        this.Crown.setPos(0.0F, -6.0F, 0.0F);
-        this.Crown.addBox(-4.5F, -4.0F, -4.5F, 9, 5, 9, 0.0F);
+        this.Crown.setPos(0.0F, -6.0F, 0.1F);
+        this.Crown.addBox(-4.5F, -4.0F, -4.5F, 9, 5, 9, modelSize);
         this.head.addChild(this.Crown);
 	}
 	
