@@ -429,7 +429,7 @@ public class RavenEntity extends FURTameableEntity implements IFlyingAnimal {
      */
     public static boolean checkRavenSpawnRules(EntityType<RavenEntity> p_223317_0_, IWorld p_223317_1_, SpawnReason p_223317_2_, BlockPos p_223317_3_, Random p_223317_4_) {
         BlockState blockstate = p_223317_1_.getBlockState(p_223317_3_.below());
-        return (blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR)) && p_223317_1_.getRawBrightness(p_223317_3_, 0) > 8;
+        return blockstate.is(BlockTags.LEAVES) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(BlockTags.LOGS) || blockstate.is(Blocks.AIR);
 	}
 
     /**
@@ -437,7 +437,7 @@ public class RavenEntity extends FURTameableEntity implements IFlyingAnimal {
      */
     public static boolean checkSeagullSpawnRules(EntityType<RavenEntity> p_223317_0_, IWorld p_223317_1_, SpawnReason p_223317_2_, BlockPos p_223317_3_, Random p_223317_4_) {
         BlockState blockstate = p_223317_1_.getBlockState(p_223317_3_.below());
-        return (blockstate.is(BlockTags.SAND) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(Blocks.AIR)) && p_223317_1_.getRawBrightness(p_223317_3_, 0) > 8;
+        return blockstate.is(BlockTags.SAND) || blockstate.is(Blocks.GRASS_BLOCK) || blockstate.is(Blocks.AIR);
 	}
     
     @Override
