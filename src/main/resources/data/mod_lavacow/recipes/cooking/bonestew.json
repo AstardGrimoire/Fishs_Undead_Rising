@@ -1,0 +1,19 @@
+{
+  "type": "farmersdelight:cooking",
+  "recipe_book_tab": "meals",
+  "ingredients": [
+	{
+		"tag": "forge:bones"
+    },
+    {
+		"item": "mod_lavacow:bloodtooth_shroom"
+    }
+  ],  
+  "result": {
+    "item": "mod_lavacow:bonestew"
+  },
+  "container": {
+    "item": "minecraft:bowl"
+  },
+  "cookingtime": 200
+}
